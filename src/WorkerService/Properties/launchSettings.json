@@ -1,0 +1,19 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+    "profiles": {
+        "WKS - LOCAL": {
+            "commandName": "Project",
+            "dotnetRunMessages": true,
+            "environmentVariables": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
+        },
+        "WKS - HML": {
+            "commandName": "Project",
+            "dotnetRunMessages": true,
+            "environmentVariables": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
+        }
+    }
+}
