@@ -2,6 +2,7 @@ using API.Configurations.Swagger;
 using API.Configurations;
 using CrossCutting.IoC;
 using Serilog;
+using Web.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,7 @@ NativeBootstrapInjector.RegisterServices(builder.Services, builder.Configuration
 
 var app = builder.Build();
 
-
+app.UseRequestContextLogging();
 app.MapControllers();
 app.UseCorsSetup();
 app.UseAuthorization();
@@ -30,6 +31,5 @@ app.UseSwaggerSetup();
 app.UseHttpsRedirection();
 app.UseHealthcheckSetup();
 app.UseStaticFiles();
-app.Run();
 app.MapOpenApi();
 app.Run();

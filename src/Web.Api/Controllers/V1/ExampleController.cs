@@ -6,14 +6,15 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace API.Controllers.V1
 {
+    [ApiController]
     [ApiVersion("1.0")]
     [Produces("application/json")]
-    [Route("api/{v1:apiVersion}/[controller]")]
-    [Authorize]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    //[Authorize]
     [SwaggerTag("Controller de exemplo - V1")]
     public class ExampleController : Controller
     {
-        [HttpGet("getAll")]
+        [HttpGet()]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetAll.Summary, Description = ExampleControllerMarkdown.GetAll.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
@@ -25,7 +26,7 @@ namespace API.Controllers.V1
             return Ok();
         }
 
-        [HttpGet("get-byid/{id}")]
+        [HttpGet("{id:int}")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetById.Summary, Description = ExampleControllerMarkdown.GetById.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
@@ -37,7 +38,7 @@ namespace API.Controllers.V1
             return Ok();
         }
 
-        [HttpPost("add")]
+        [HttpPost()]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.Post.Summary, Description = ExampleControllerMarkdown.Post.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
@@ -48,7 +49,7 @@ namespace API.Controllers.V1
             return Ok();
         }
 
-        [HttpPut("edit")]
+        [HttpPut("{id:int}")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.Put.Summary, Description = ExampleControllerMarkdown.Put.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
@@ -59,7 +60,7 @@ namespace API.Controllers.V1
             return Ok();
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("{id:int}")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.Delete.Summary, Description = ExampleControllerMarkdown.Delete.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
