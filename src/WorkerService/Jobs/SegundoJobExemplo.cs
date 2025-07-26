@@ -1,5 +1,6 @@
 using Quartz;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace WorkerService.Jobs
 {
@@ -10,10 +11,19 @@ namespace WorkerService.Jobs
         {
             _logger = logger;
         }
-        public Task Execute(IJobExecutionContext context)
+        public async Task Execute(IJobExecutionContext context)
         {
-            _logger.LogInformation($"SegundoJobExemplo executado em: {DateTime.Now}");
-            return Task.CompletedTask;
+            var jobName = context.JobDetail.Key.Name;
+            var start = DateTime.Now;
+            _logger.LogInformation($"[JOB START] {jobName} iniciado em: {start:yyyy-MM-dd HH:mm:ss}");
+            var stopwatch = Stopwatch.StartNew();
+
+            // Simulação de trabalho real
+            await Task.Delay(10000); // Remova ou ajuste conforme necessário
+
+            stopwatch.Stop();
+            var end = DateTime.Now;
+            _logger.LogInformation($"[JOB END] {jobName} finalizado em: {end:yyyy-MM-dd HH:mm:ss} | Tempo de execução: {stopwatch.Elapsed.TotalSeconds:F2} segundos");
         }
     }
 } 

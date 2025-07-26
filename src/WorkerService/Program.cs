@@ -5,7 +5,9 @@ using System.Collections.Generic;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-builder.Services.AddQuartzJobsFromConfig(builder.Configuration);
+var appSettings = new AppSettings();
+builder.Configuration.Bind(appSettings);
+builder.Services.AddQuartzJobsFromConfig(appSettings);
 
 var host = builder.Build();
 host.Run();

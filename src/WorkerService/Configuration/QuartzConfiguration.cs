@@ -5,11 +5,11 @@ namespace WorkerService.Configuration
 {
     public static class QuartzConfiguration
     {
-        public static IServiceCollection AddQuartzJobsFromConfig(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddQuartzJobsFromConfig(this IServiceCollection services, AppSettings appSettings)
         {
             services.AddQuartz(q =>
             {
-                var config = configuration.GetSection("QuartzJobs").Get<List<QuartzJobConfig>>();
+                var config = appSettings.QuartzJobs;
                 if (config == null) return;
 
                 // Busca todos os tipos que implementam IJob no assembly atual
@@ -25,7 +25,6 @@ namespace WorkerService.Configuration
                         continue; // Ignora se não encontrar a classe
 
                     var jobKey = new JobKey(job.Name);
-                    // Registra o job de forma genérica
                     q.AddJob(jobType, jobKey);
 
                     q.AddTrigger(opts => opts
