@@ -1,4 +1,5 @@
 ﻿using API.Markdown.V1;
+using Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,12 @@ namespace API.Controllers.V1
     [SwaggerTag("Controller de exemplo - V1")]
     public class ExampleController : Controller
     {
+        private readonly IExampleAppService _exampleAppService;
+        public ExampleController(IExampleAppService exampleAppService)
+        {
+            _exampleAppService = exampleAppService;
+        }
+
         [HttpGet()]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetAll.Summary, Description = ExampleControllerMarkdown.GetAll.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
@@ -21,32 +28,21 @@ namespace API.Controllers.V1
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
         [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-            return Ok();
+            return Ok(await _exampleAppService.GetAll(cancellationToken));
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{zipCode}")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetById.Summary, Description = ExampleControllerMarkdown.GetById.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
         [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(string zipCode, CancellationToken cancellationToken)
         {
-            return Ok();
-        }
-
-        [HttpPost()]
-        [SwaggerOperation(Summary = ExampleControllerMarkdown.Post.Summary, Description = ExampleControllerMarkdown.Post.Description)]
-        [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
-        [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
-        [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
-        [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
-        public async Task<IActionResult> Post()
-        {
-            return Ok();
+            return Ok(await _exampleAppService.GetByZipCode(zipCode, cancellationToken));
         }
 
         [HttpPut("{id:int}")]
@@ -55,7 +51,7 @@ namespace API.Controllers.V1
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
         [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
-        public async Task<IActionResult> Put()
+        public async Task<IActionResult> Put(CancellationToken cancellationToken)
         {
             return Ok();
         }
@@ -66,7 +62,7 @@ namespace API.Controllers.V1
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
         [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             return Ok();
         }
