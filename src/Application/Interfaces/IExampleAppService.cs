@@ -9,7 +9,7 @@ namespace Application.Services
     public interface IExampleAppService
     {
         Task<string> GetAll(CancellationToken cancellationToken);
-
         Task<string> GetByZipCode(string zipCode, CancellationToken cancellationToken);
+        Task SynCity(CancellationToken cancellationToken);
     }
 }

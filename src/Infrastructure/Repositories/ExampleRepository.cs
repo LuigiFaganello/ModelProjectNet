@@ -34,10 +34,10 @@ namespace Infrastructure.Repositories
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
-        public async Task<Example> AddAsync(Example entity)
+        public async Task<Example> AddAsync(Example entity, CancellationToken cancellationToken)
         {
-            var entry = await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            var entry = await _dbSet.AddAsync(entity, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
             return entry.Entity;
         }
 
