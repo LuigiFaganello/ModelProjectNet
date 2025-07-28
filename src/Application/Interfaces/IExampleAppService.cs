@@ -10,6 +10,6 @@ namespace Application.Services
     {
         Task<string> GetAll(CancellationToken cancellationToken);
         Task<string> GetByZipCode(string zipCode, CancellationToken cancellationToken);
-        Task SynCity(CancellationToken cancellationToken);
+        Task SyncCity(CancellationToken cancellationToken);
     }
 }

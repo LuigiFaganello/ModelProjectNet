@@ -7,8 +7,8 @@ using Infrastructure.ExternalService.DTO;
 
 namespace Infrastructure.ExternalService.Interface
 {
-    public interface IViacepService
+    public interface IExampleService
     {
-        Task<IEnumerable<ViacepResultDTO>> GetCityByCountry(string country, string city);
+        Task<IEnumerable<ExampleResultDTO>> GetCityByCountry(string country, string city);
     }
 }

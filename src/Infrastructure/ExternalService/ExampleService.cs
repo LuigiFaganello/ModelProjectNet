@@ -15,13 +15,13 @@ using Newtonsoft.Json;
 
 namespace Infrastructure.ExternalService
 {
-    public class ViacepService : IViacepService
+    public class ExampleService : IExampleService
     {
-        private readonly ILogger<ViacepService> _logger;
+        private readonly ILogger<ExampleService> _logger;
         private readonly HttpClient _httpClient;
         private readonly AppSettings _settings;
 
-        public ViacepService(ILogger<ViacepService> logger,
+        public ExampleService(ILogger<ExampleService> logger,
                             HttpClient httpClient,
                             IOptions<AppSettings> options)
         {
@@ -31,11 +31,11 @@ namespace Infrastructure.ExternalService
             _httpClient.BaseAddress = new System.Uri(_settings.Viacep.BaseUrl);
         }
 
-        public async Task<IEnumerable<ViacepResultDTO>> GetCityByCountry(string country, string city)
+        public async Task<IEnumerable<ExampleResultDTO>> GetCityByCountry(string country, string city)
         {
             try
             {
-                var (response, content) = await _httpClient.SendRequestAsync<string, IEnumerable<ViacepResultDTO>>(
+                var (response, content) = await _httpClient.SendRequestAsync<string, IEnumerable<ExampleResultDTO>>(
                     $"ws/{country}/{city}/Paulista/json/", HttpMethod.Get, null, null);
 
                 response.EnsureSuccessStatusCode();

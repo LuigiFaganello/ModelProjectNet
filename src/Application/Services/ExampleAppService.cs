@@ -16,11 +16,11 @@ namespace Application.Services
     {
         private readonly ILogger<ExampleAppService> _logger;
         private readonly IExampleRepository _exampleRepository;
-        private readonly IViacepService _viacepService;
+        private readonly IExampleService _viacepService;
 
         public ExampleAppService(ILogger<ExampleAppService> logger, 
                                  IExampleRepository exampleRepository,
-                                 IViacepService viacepService)
+                                 IExampleService viacepService)
         {
             _logger = logger;
             _exampleRepository = exampleRepository;
@@ -54,7 +54,7 @@ namespace Application.Services
                 return null;
             }
         }
-        public async Task SynCity(CancellationToken cancellationToken)
+        public async Task SyncCity(CancellationToken cancellationToken)
         {
             try
             {

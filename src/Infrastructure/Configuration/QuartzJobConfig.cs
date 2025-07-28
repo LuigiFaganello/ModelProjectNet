@@ -1,4 +1,4 @@
-namespace WorkerService
+namespace Infrastructure.Configuration
 {
     public class QuartzJobConfig
     {

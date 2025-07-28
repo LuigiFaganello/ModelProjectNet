@@ -22,16 +22,18 @@ namespace Infrastructure
             IConfiguration configuration) =>
             services
                 .AddServices()
-                .AddDatabase(configuration)
-                .AddHealthChecks(configuration);
+                .AddDatabase(configuration);
 
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
+            //Config
+            services.AddHttpClient();
+
             //Repository
             services.AddScoped<IExampleRepository, ExampleRepository>();
 
             //External Service
-            services.AddScoped<IViacepService, ViacepService>();
+            services.AddScoped<IExampleService, ExampleService>();
 
             return services;
         }
@@ -48,11 +50,6 @@ namespace Infrastructure
 
             services.AddScoped<DataContext>(sp => sp.GetRequiredService<DataContext>());
 
-            return services;
-        }
-
-        private static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
-        {
             return services;
         }
     }

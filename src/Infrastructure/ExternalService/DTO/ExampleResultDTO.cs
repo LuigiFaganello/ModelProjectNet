@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.ExternalService.DTO
 {
-    public class ViacepResultDTO
+    public class ExampleResultDTO
     {
         [JsonPropertyName("cep")]
         public string Cep { get; set; } = string.Empty;

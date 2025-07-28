@@ -1,4 +1,5 @@
 using System.Reflection;
+using Infrastructure.Configuration;
 using Quartz;
 
 namespace WorkerService.Configuration
@@ -12,7 +13,6 @@ namespace WorkerService.Configuration
                 var config = appSettings.QuartzJobs;
                 if (config == null) return;
 
-                // Busca todos os tipos que implementam IJob no assembly atual
                 var jobTypes = Assembly.GetExecutingAssembly()
                     .GetTypes()
                     .Where(t => typeof(IJob).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract)
@@ -22,7 +22,7 @@ namespace WorkerService.Configuration
                 {
                     if (!job.Active) continue;
                     if (!jobTypes.TryGetValue(job.Name, out var jobType))
-                        continue; // Ignora se não encontrar a classe
+                        continue;
 
                     var jobKey = new JobKey(job.Name);
                     q.AddJob(jobType, jobKey);

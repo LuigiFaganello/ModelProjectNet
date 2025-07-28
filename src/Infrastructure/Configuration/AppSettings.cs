@@ -9,6 +9,8 @@ namespace Infrastructure.Configuration
     public class AppSettings
     {
         public Viacep Viacep { get; set; }
+
+        public List<QuartzJobConfig> QuartzJobs { get; set; }
     }
 
     public class Viacep
