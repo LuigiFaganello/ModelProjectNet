@@ -8,12 +8,8 @@ using Domain.Entities;
 
 namespace Domain.Interfaces
 {
-    public interface IExampleRepository
+    public interface IExampleRepository : IRepositoryBase<Example>
     {
-        //Task<List<Example>> GetAllAsync(CancellationToken cancellationToken);
-        //Task<Example> GetByZipCodeAsync(string zipCode, CancellationToken cancellationToken);
-        //Task<Example> AddAsync(Example entity, CancellationToken cancellationToken);
-        //Task<Example> UpdateAsync(Example entity);
-        //Task<bool> DeleteAsync(int id);
+        Task<Example> GetByZipCodeAsync(string zipCode, CancellationToken cancellationToken);
     }
 }

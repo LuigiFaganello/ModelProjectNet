@@ -30,7 +30,7 @@ namespace Application.Services
         {
             try
             {
-                //var listexampleResult = await _exampleRepository.GetAllAsync(cancellationToken);
+                var listexampleResult = await _exampleRepository.GetAllAsync(cancellationToken);
 
                 return null;
             }
@@ -44,7 +44,7 @@ namespace Application.Services
         {
             try
             {
-                //var listexampleResult = await _exampleRepository.GetByZipCodeAsync(zipCode, cancellationToken);
+                var listexampleResult = await _exampleRepository.GetByZipCodeAsync(zipCode, cancellationToken);
 
                 return null;
             }
@@ -62,14 +62,17 @@ namespace Application.Services
 
                 foreach (var exampleResult in listexampleResult)
                 {
-                    //await _exampleRepository.AddAsync(new Example(exampleResult.Cep, 
-                    //                                              exampleResult.Logradouro, 
-                    //                                              exampleResult.Complemento,
-                    //                                              exampleResult.Unidade,
-                    //                                              exampleResult.Bairro,
-                    //                                              exampleResult.Localidade,
-                    //                                              exampleResult.Uf,
-                    //                                              exampleResult.Estado), cancellationToken);
+                    await _exampleRepository.AddAsync(new Example(exampleResult.Cep,
+                                                                  exampleResult.Logradouro,
+                                                                  exampleResult.Complemento,
+                                                                  exampleResult.Unidade,
+                                                                  exampleResult.Bairro,
+                                                                  exampleResult.Localidade,
+                                                                  exampleResult.Uf,
+                                                                  exampleResult.Estado), cancellationToken);
+
+
+                    await _exampleRepository.SaveChangesAsync(cancellationToken);
                 }
             }
             catch (Exception ex)

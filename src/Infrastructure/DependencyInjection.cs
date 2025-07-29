@@ -48,8 +48,6 @@ namespace Infrastructure
                     ServerVersion.AutoDetect(connectionString)
                 ));
 
-            services.AddScoped<DataContext>(sp => sp.GetRequiredService<DataContext>());
-
             return services;
         }
     }
