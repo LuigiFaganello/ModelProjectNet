@@ -16,23 +16,23 @@ namespace Application.Services
     {
         private readonly ILogger<ExampleAppService> _logger;
         private readonly IExampleRepository _exampleRepository;
-        private readonly IExampleService _viacepService;
+        private readonly IExampleService _exampleService;
 
         public ExampleAppService(ILogger<ExampleAppService> logger, 
                                  IExampleRepository exampleRepository,
-                                 IExampleService viacepService)
+                                 IExampleService exampleService)
         {
             _logger = logger;
             _exampleRepository = exampleRepository;
-            _viacepService = viacepService;
+            _exampleService = exampleService;
         }
         public async Task<string> GetAll(CancellationToken cancellationToken)
         {
             try
             {
-                var listexampleResult = await _exampleRepository.GetAllAsync(cancellationToken);
+                //var listexampleResult = await _exampleRepository.GetAllAsync(cancellationToken);
 
-                return listexampleResult.ToString();
+                return null;
             }
             catch (Exception ex)
             {
@@ -44,9 +44,9 @@ namespace Application.Services
         {
             try
             {
-                var listexampleResult = await _exampleRepository.GetByZipCodeAsync(zipCode, cancellationToken);
+                //var listexampleResult = await _exampleRepository.GetByZipCodeAsync(zipCode, cancellationToken);
 
-                return listexampleResult.ToString();
+                return null;
             }
             catch (Exception ex)
             {
@@ -58,18 +58,18 @@ namespace Application.Services
         {
             try
             {
-                var listexampleResult = await _viacepService.GetCityByCountry("SP", "Sao%20Paulo");
+                var listexampleResult = await _exampleService.GetCityByCountry("SP", "Sao%20Paulo");
 
                 foreach (var exampleResult in listexampleResult)
                 {
-                    await _exampleRepository.AddAsync(new Example(exampleResult.Cep, 
-                                                                  exampleResult.Logradouro, 
-                                                                  exampleResult.Complemento,
-                                                                  exampleResult.Unidade,
-                                                                  exampleResult.Bairro,
-                                                                  exampleResult.Localidade,
-                                                                  exampleResult.Uf,
-                                                                  exampleResult.Estado), cancellationToken);
+                    //await _exampleRepository.AddAsync(new Example(exampleResult.Cep, 
+                    //                                              exampleResult.Logradouro, 
+                    //                                              exampleResult.Complemento,
+                    //                                              exampleResult.Unidade,
+                    //                                              exampleResult.Bairro,
+                    //                                              exampleResult.Localidade,
+                    //                                              exampleResult.Uf,
+                    //                                              exampleResult.Estado), cancellationToken);
                 }
             }
             catch (Exception ex)
