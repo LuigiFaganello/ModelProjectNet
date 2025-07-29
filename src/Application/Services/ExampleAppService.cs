@@ -5,6 +5,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.DTO;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.ExternalService.Interface;
@@ -26,31 +27,60 @@ namespace Application.Services
             _exampleRepository = exampleRepository;
             _exampleService = exampleService;
         }
-        public async Task<string> GetAll(CancellationToken cancellationToken)
+        public async Task<IEnumerable<ExampleDto>> GetAll(CancellationToken cancellationToken)
         {
             try
             {
                 var listexampleResult = await _exampleRepository.GetAllAsync(cancellationToken);
 
-                return null;
+                //Pode ser substituido por um lib como AutoMapper ou Mapster para mapear os objetos
+                var result = listexampleResult.Select(x => new ExampleDto
+                {
+                    ZipCode = x.ZipCode,
+                    Street = x.Street,
+                    Complement = x.Complement,
+                    Unit = x.Unit,
+                    Neighborhood = x.Neighborhood,
+                    City = x.City,
+                    State = x.State,
+                    StateName = x.StateName
+                }).ToList();
+
+                return result;
             }
             catch (Exception ex)
             {
-                _logger.LogError($"ERRO AO VERIFICAR ELEGIBILIDADE A SALA DE ESPERA ATIVA: {ex.Message}");
-                return null;
+                _logger.LogError(ex, "Erro ao obter todos os exemplos: {Message}", ex.Message);
+                return Enumerable.Empty<ExampleDto>();
             }
         }
-        public async Task<string> GetByZipCode(string zipCode, CancellationToken cancellationToken)
+        public async Task<ExampleDto> GetByZipCode(string zipCode, CancellationToken cancellationToken)
         {
             try
             {
-                var listexampleResult = await _exampleRepository.GetByZipCodeAsync(zipCode, cancellationToken);
+                var exampleResult = await _exampleRepository.GetByZipCodeAsync(zipCode, cancellationToken);
 
-                return null;
+                if (exampleResult == null)
+                    return null;
+
+                //Pode ser substituido por um lib como AutoMapper ou Mapster para mapear os objetos
+                var result = new ExampleDto
+                {
+                    ZipCode = exampleResult.ZipCode,
+                    Street = exampleResult.Street,
+                    Complement = exampleResult.Complement,
+                    Unit = exampleResult.Unit,
+                    Neighborhood = exampleResult.Neighborhood,
+                    City = exampleResult.City,
+                    State = exampleResult.State,
+                    StateName = exampleResult.StateName
+                };
+
+                return result;
             }
             catch (Exception ex)
             {
-                _logger.LogError($"ERRO AO VERIFICAR ELEGIBILIDADE A SALA DE ESPERA ATIVA: {ex.Message}");
+                _logger.LogError(ex, "Erro ao obter exemplo por CEP: {Message}", ex.Message);
                 return null;
             }
         }
@@ -77,7 +107,7 @@ namespace Application.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"ERRO AO VERIFICAR ELEGIBILIDADE A SALA DE ESPERA ATIVA: {ex.Message}");
+                _logger.LogError(ex, "Erro ao realizar o sync da tabela de exemplo por CEP: {Message}", ex.Message);
             }
         }
     }

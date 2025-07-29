@@ -1,4 +1,5 @@
 ﻿using API.Markdown.V1;
+using Application.DTO;
 using Application.Services;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,7 @@ namespace API.Controllers.V1
         [HttpGet()]
         [MapToApiVersion("1.0")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetAll.Summary, Description = ExampleControllerMarkdown.GetAll.Description)]
-        [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
+        [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(IEnumerable<ExampleDto>))]
         [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
         [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
@@ -38,7 +39,7 @@ namespace API.Controllers.V1
         [HttpGet("{zipCode}")]
         [MapToApiVersion("1.0")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetById.Summary, Description = ExampleControllerMarkdown.GetById.Description)]
-        [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
+        [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(ExampleDto))]
         [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
         [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
@@ -71,9 +72,5 @@ namespace API.Controllers.V1
         {
             return Ok();
         }
-
-        [HttpGet("ping")]
-        [MapToApiVersion("1.0")]
-        public IActionResult Ping() => Ok("pong");
     }
 }
