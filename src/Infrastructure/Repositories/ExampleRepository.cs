@@ -15,7 +15,7 @@ namespace Infrastructure.Repositories
             _context = context;
             _dbSet = context.Examples;
         }
-        public async Task<IEnumerable<Example>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<List<Example>> GetAllAsync(CancellationToken cancellationToken)
         {
             return await _dbSet
                 .OrderBy(x => x.ZipCode)

@@ -10,7 +10,7 @@ namespace Domain.Interfaces
 {
     public interface IExampleRepository
     {
-        Task<IEnumerable<Example>> GetAllAsync(CancellationToken cancellationToken);
+        Task<List<Example>> GetAllAsync(CancellationToken cancellationToken);
         Task<Example> GetByZipCodeAsync(string zipCode, CancellationToken cancellationToken);
         Task<Example> AddAsync(Example entity, CancellationToken cancellationToken);
         Task<Example> UpdateAsync(Example entity);

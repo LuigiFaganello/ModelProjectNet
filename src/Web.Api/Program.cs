@@ -12,17 +12,17 @@ builder.Configuration
    .SetBasePath(builder.Environment.ContentRootPath)
    .AddJsonFile("appsettings.json", true, true)
    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
-   .AddEnvironmentVariables();
-
-builder.Services
-   .AddApplication()
-   .AddInfrastructure(builder.Configuration);  
+   .AddEnvironmentVariables();  
 
 builder.Services.AddCorsConfiguration();
 builder.Services.AddSwaggerConfiguration(builder.Configuration);
 builder.Services.AddHealthcheckConfiguration();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+
+builder.Services
+   .AddApplication()
+   .AddInfrastructure(builder.Configuration);
 
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Settings"));
 

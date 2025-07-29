@@ -1,5 +1,6 @@
 ﻿using API.Markdown.V1;
 using Application.Services;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ namespace API.Controllers.V1
         }
 
         [HttpGet()]
+        [MapToApiVersion("1.0")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetAll.Summary, Description = ExampleControllerMarkdown.GetAll.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
@@ -34,6 +36,7 @@ namespace API.Controllers.V1
         }
 
         [HttpGet("{zipCode}")]
+        [MapToApiVersion("1.0")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetById.Summary, Description = ExampleControllerMarkdown.GetById.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
@@ -46,17 +49,19 @@ namespace API.Controllers.V1
         }
 
         [HttpPut("{id:int}")]
+        [MapToApiVersion("1.0")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.Put.Summary, Description = ExampleControllerMarkdown.Put.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
         [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
-        public async Task<IActionResult> Put(CancellationToken cancellationToken)
+        public async Task<IActionResult> Put(int id, CancellationToken cancellationToken)
         {
             return Ok();
         }
 
         [HttpDelete("{id:int}")]
+        [MapToApiVersion("1.0")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.Delete.Summary, Description = ExampleControllerMarkdown.Delete.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(string))]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
@@ -66,5 +71,9 @@ namespace API.Controllers.V1
         {
             return Ok();
         }
+
+        [HttpGet("ping")]
+        [MapToApiVersion("1.0")]
+        public IActionResult Ping() => Ok("pong");
     }
 }

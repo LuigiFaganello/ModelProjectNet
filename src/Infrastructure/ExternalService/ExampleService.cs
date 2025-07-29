@@ -27,6 +27,7 @@ namespace Infrastructure.ExternalService
         {
             _logger = logger;
             _httpClient = httpClient;
+            _settings = options.Value;
             _httpClient.Timeout = TimeSpan.FromSeconds(_settings.Viacep.TimeOut);
             _httpClient.BaseAddress = new System.Uri(_settings.Viacep.BaseUrl);
         }
