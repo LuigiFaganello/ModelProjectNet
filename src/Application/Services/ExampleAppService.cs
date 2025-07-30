@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.DTO;
+using Domain.Common;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.ExternalService.Interface;
@@ -27,7 +28,7 @@ namespace Application.Services
             _exampleRepository = exampleRepository;
             _exampleService = exampleService;
         }
-        public async Task<IEnumerable<ExampleAppServiceDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<Result<IEnumerable<ExampleAppServiceDto>>> GetAll(CancellationToken cancellationToken)
         {
             try
             {
@@ -45,22 +46,23 @@ namespace Application.Services
                     State = x.State
                 }).ToList();
 
-                return result;
+                return Result<IEnumerable<ExampleAppServiceDto>>.Success(result);
+
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao obter todos os exemplos: {Message}", ex.Message);
-                return Enumerable.Empty<ExampleAppServiceDto>();
+                return Result<IEnumerable<ExampleAppServiceDto>>.Failure(Error.Internal("Erro ao obter todos os exemplos"));
             }
         }
-        public async Task<ExampleAppServiceDto> GetByZipCode(string zipCode, CancellationToken cancellationToken)
+        public async Task<Result<ExampleAppServiceDto>> GetByZipCode(string zipCode, CancellationToken cancellationToken)
         {
             try
             {
                 var exampleResult = await _exampleRepository.GetByZipCodeAsync(zipCode, cancellationToken);
 
                 if (exampleResult == null)
-                    return null;
+                    return Result<ExampleAppServiceDto>.Failure(Error.NotFound("zipCode", zipCode));
 
                 //Pode ser substituido por um lib como AutoMapper ou Mapster para mapear os objetos
                 var result = new ExampleAppServiceDto
@@ -74,12 +76,12 @@ namespace Application.Services
                     State = exampleResult.State
                 };
 
-                return result;
+                return Result<ExampleAppServiceDto>.Success(result);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao obter exemplo por CEP: {Message}", ex.Message);
-                return null;
+                return Result<ExampleAppServiceDto>.Failure(Error.Internal("Erro ao obter exemplo por CEP"));
             }
         }
         public async Task SyncCity(CancellationToken cancellationToken)

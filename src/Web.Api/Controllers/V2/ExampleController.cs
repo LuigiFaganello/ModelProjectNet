@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Web.Api.Controllers;
 
 namespace API.Controllers.V2
 {
@@ -15,10 +16,11 @@ namespace API.Controllers.V2
     [Route("api/v{version:apiVersion}/[controller]")]
     //[Authorize]
     [SwaggerTag("Controller de exemplo - V2")]
-    public class ExampleController : Controller
+    public class ExampleController : BaseController
     {
         private readonly IExampleAppService _exampleAppService;
-        public ExampleController(IExampleAppService exampleAppService)
+        public ExampleController(IExampleAppService exampleAppService, ILogger<ExampleController> logger)
+            : base(logger)
         {
             _exampleAppService = exampleAppService;
         }

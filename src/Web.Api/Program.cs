@@ -28,6 +28,7 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Settin
 var app = builder.Build();
 
 app.UseMiddleware<CorrelationMiddleware>();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.MapControllers();
 app.UseCorsSetup();
 app.UseAuthorization();

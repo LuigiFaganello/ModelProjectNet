@@ -2,10 +2,12 @@
 using Application.DTO;
 using Application.Services;
 using Asp.Versioning;
+using Infrastructure.ExternalService.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Web.Api.Controllers;
 
 namespace API.Controllers.V1
 {
@@ -15,10 +17,11 @@ namespace API.Controllers.V1
     [Route("api/v{version:apiVersion}/[controller]")]
     //[Authorize]
     [SwaggerTag("Controller de exemplo - V1")]
-    public class ExampleController : Controller
+    public class ExampleController : BaseController
     {
         private readonly IExampleAppService _exampleAppService;
-        public ExampleController(IExampleAppService exampleAppService)
+        public ExampleController(IExampleAppService exampleAppService, ILogger<ExampleController> logger)
+            : base(logger)
         {
             _exampleAppService = exampleAppService;
         }
@@ -33,7 +36,7 @@ namespace API.Controllers.V1
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-            return Ok(await _exampleAppService.GetAll(cancellationToken));
+            return HandleResult(await _exampleAppService.GetAll(cancellationToken));
         }
 
         [HttpGet("{zipCode}")]
@@ -46,7 +49,7 @@ namespace API.Controllers.V1
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
         public async Task<IActionResult> GetById(string zipCode, CancellationToken cancellationToken)
         {
-            return Ok(await _exampleAppService.GetByZipCode(zipCode, cancellationToken));
+            return HandleResult(await _exampleAppService.GetByZipCode(zipCode, cancellationToken));
         }
 
         [HttpPost()]
