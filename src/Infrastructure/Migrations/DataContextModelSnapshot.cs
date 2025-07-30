@@ -56,11 +56,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("char(2)")
                         .HasColumnName("state");
 
-                    b.Property<string>("StateName")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("state_name");
-
                     b.Property<string>("Street")
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)")

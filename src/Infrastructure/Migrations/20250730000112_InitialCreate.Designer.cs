@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250726002130_InitialCreate")]
+    [Migration("20250730000112_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -58,11 +58,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(2)
                         .HasColumnType("char(2)")
                         .HasColumnName("state");
-
-                    b.Property<string>("StateName")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("state_name");
 
                     b.Property<string>("Street")
                         .HasMaxLength(255)

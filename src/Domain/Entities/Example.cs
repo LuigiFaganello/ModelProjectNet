@@ -9,14 +9,17 @@ namespace Domain.Entities
 {
     public class Example : EntityBase
     {
+        public Example()
+        {
+                
+        }
         public Example(string zipCode, 
                        string street, 
                        string complement, 
                        string unit, 
                        string neighborhood, 
                        string city, 
-                       string state, 
-                       string stateName)
+                       string state)
         {
             ZipCode = zipCode;
             Street = street;
@@ -25,7 +28,6 @@ namespace Domain.Entities
             Neighborhood = neighborhood;
             City = city;
             State = state;
-            StateName = stateName;
         }
 
         public string ZipCode { get; private set; } = string.Empty;
@@ -35,6 +37,5 @@ namespace Domain.Entities
         public string Neighborhood { get; private set; } = string.Empty;
         public string City { get; private set; } = string.Empty;
         public string State { get; private set; } = string.Empty;
-        public string StateName { get; private set; } = string.Empty;
     }
 }

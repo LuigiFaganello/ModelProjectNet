@@ -61,11 +61,6 @@ namespace Infrastructure.Configuration
                 .HasColumnType("char(2)")
                 .IsRequired();
 
-            builder.Property(e => e.StateName)
-                .HasColumnName("state_name")
-                .HasMaxLength(50)
-                .HasColumnType("varchar(50)");
-
             builder.Property(e => e.CreatedDate)
                 .HasColumnName("created_date")
                 .HasColumnType("datetime")

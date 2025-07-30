@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class ExampleDto
+    public class ExampleAppServiceDto
     {
         public string ZipCode { get; set; }
         public string Street { get; set; }
@@ -15,6 +15,5 @@ namespace Application.DTO
         public string Neighborhood { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public string StateName { get; set; }
     }
 }

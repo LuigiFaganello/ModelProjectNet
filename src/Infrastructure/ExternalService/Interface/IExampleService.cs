@@ -9,6 +9,6 @@ namespace Infrastructure.ExternalService.Interface
 {
     public interface IExampleService
     {
-        Task<IEnumerable<ExampleResultDTO>> GetCityByCountry(string country, string city);
+        Task<IEnumerable<ExampleServiceDTO>> GetCityByCountry(string country, string city);
     }
 }

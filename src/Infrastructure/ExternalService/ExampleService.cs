@@ -32,11 +32,11 @@ namespace Infrastructure.ExternalService
             _httpClient.BaseAddress = new System.Uri(_settings.Viacep.BaseUrl);
         }
 
-        public async Task<IEnumerable<ExampleResultDTO>> GetCityByCountry(string country, string city)
+        public async Task<IEnumerable<ExampleServiceDTO>> GetCityByCountry(string country, string city)
         {
             try
             {
-                var (response, content) = await _httpClient.SendRequestAsync<string, IEnumerable<ExampleResultDTO>>(
+                var (response, content) = await _httpClient.SendRequestAsync<string, IEnumerable<ExampleServiceDTO>>(
                     $"ws/{country}/{city}/Paulista/json/", HttpMethod.Get, null, null);
 
                 response.EnsureSuccessStatusCode();

@@ -27,14 +27,14 @@ namespace Application.Services
             _exampleRepository = exampleRepository;
             _exampleService = exampleService;
         }
-        public async Task<IEnumerable<ExampleDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<IEnumerable<ExampleAppServiceDto>> GetAll(CancellationToken cancellationToken)
         {
             try
             {
                 var listexampleResult = await _exampleRepository.GetAllAsync(cancellationToken);
 
                 //Pode ser substituido por um lib como AutoMapper ou Mapster para mapear os objetos
-                var result = listexampleResult.Select(x => new ExampleDto
+                var result = listexampleResult.Select(x => new ExampleAppServiceDto
                 {
                     ZipCode = x.ZipCode,
                     Street = x.Street,
@@ -42,8 +42,7 @@ namespace Application.Services
                     Unit = x.Unit,
                     Neighborhood = x.Neighborhood,
                     City = x.City,
-                    State = x.State,
-                    StateName = x.StateName
+                    State = x.State
                 }).ToList();
 
                 return result;
@@ -51,10 +50,10 @@ namespace Application.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao obter todos os exemplos: {Message}", ex.Message);
-                return Enumerable.Empty<ExampleDto>();
+                return Enumerable.Empty<ExampleAppServiceDto>();
             }
         }
-        public async Task<ExampleDto> GetByZipCode(string zipCode, CancellationToken cancellationToken)
+        public async Task<ExampleAppServiceDto> GetByZipCode(string zipCode, CancellationToken cancellationToken)
         {
             try
             {
@@ -64,7 +63,7 @@ namespace Application.Services
                     return null;
 
                 //Pode ser substituido por um lib como AutoMapper ou Mapster para mapear os objetos
-                var result = new ExampleDto
+                var result = new ExampleAppServiceDto
                 {
                     ZipCode = exampleResult.ZipCode,
                     Street = exampleResult.Street,
@@ -72,8 +71,7 @@ namespace Application.Services
                     Unit = exampleResult.Unit,
                     Neighborhood = exampleResult.Neighborhood,
                     City = exampleResult.City,
-                    State = exampleResult.State,
-                    StateName = exampleResult.StateName
+                    State = exampleResult.State
                 };
 
                 return result;
@@ -97,9 +95,8 @@ namespace Application.Services
                                                                   exampleResult.Complemento,
                                                                   exampleResult.Unidade,
                                                                   exampleResult.Bairro,
-                                                                  exampleResult.Localidade,
-                                                                  exampleResult.Uf,
-                                                                  exampleResult.Estado), cancellationToken);
+                                                                  exampleResult.Estado,
+                                                                  exampleResult.Uf), cancellationToken);
 
 
                     await _exampleRepository.SaveChangesAsync(cancellationToken);

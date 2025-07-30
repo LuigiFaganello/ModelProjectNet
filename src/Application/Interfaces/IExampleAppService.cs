@@ -9,8 +9,8 @@ namespace Application.Services
 {
     public interface IExampleAppService
     {
-        Task<IEnumerable<ExampleDto>> GetAll(CancellationToken cancellationToken);
-        Task<ExampleDto> GetByZipCode(string zipCode, CancellationToken cancellationToken);
+        Task<IEnumerable<ExampleAppServiceDto>> GetAll(CancellationToken cancellationToken);
+        Task<ExampleAppServiceDto> GetByZipCode(string zipCode, CancellationToken cancellationToken);
         Task SyncCity(CancellationToken cancellationToken);
     }
 }

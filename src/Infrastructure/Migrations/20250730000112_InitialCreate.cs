@@ -34,8 +34,6 @@ namespace Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     state = table.Column<string>(type: "char(2)", maxLength: 2, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    state_name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     created_date = table.Column<DateTime>(type: "datetime", nullable: false),
                     updated_date = table.Column<DateTime>(type: "datetime", nullable: false)
                 },

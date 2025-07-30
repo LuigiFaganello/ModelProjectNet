@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace API.Controllers.V1
+namespace API.Controllers.V2
 {
     [ApiController]
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     [Produces("application/json")]
     [Route("api/v{version:apiVersion}/[controller]")]
     //[Authorize]
-    [SwaggerTag("Controller de exemplo - V1")]
+    [SwaggerTag("Controller de exemplo - V2")]
     public class ExampleController : Controller
     {
         private readonly IExampleAppService _exampleAppService;
@@ -24,7 +24,7 @@ namespace API.Controllers.V1
         }
 
         [HttpGet()]
-        [MapToApiVersion("1.0")]
+        [MapToApiVersion("2.0")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetAll.Summary, Description = ExampleControllerMarkdown.GetAll.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(IEnumerable<ExampleAppServiceDto>))]
         [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
@@ -37,7 +37,7 @@ namespace API.Controllers.V1
         }
 
         [HttpGet("{zipCode}")]
-        [MapToApiVersion("1.0")]
+        [MapToApiVersion("2.0")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.GetByZipCode.Summary, Description = ExampleControllerMarkdown.GetByZipCode.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode200, Type = typeof(ExampleAppServiceDto))]
         [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
@@ -50,7 +50,7 @@ namespace API.Controllers.V1
         }
 
         [HttpPost()]
-        [MapToApiVersion("1.0")]
+        [MapToApiVersion("2.0")]
         [SwaggerOperation(Summary = ExampleControllerMarkdown.Post.Summary, Description = ExampleControllerMarkdown.Post.Description)]
         [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode201)]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]

@@ -9,25 +9,17 @@
             <strong>Banco de dados</strong><br/><br/>
             - Tabela = Examples = Retorna dados da tabela de exemplos";
         }
-        public class GetById
+        public class GetByZipCode
         {
-            public const string Summary = @"Retorna por id os dados";
-            public const string Description = @"Retorna por id os dados<br/><br/>
+            public const string Summary = @"Retorna por zipcode os dados";
+            public const string Description = @"Retorna por zipcode os dados<br/><br/>
             <strong>Banco de dados</strong><br/><br/>
             - Tabela = Examples = Retorna dados da tabela de exemplos";
         }
-        public class Put
+        public class Post
         {
-            public const string Summary = @"Edita dados existentes";
-            public const string Description = @"Edita dados existentes<br/><br/>
-            <strong>Banco de dados</strong><br/><br/>
-            - Tabela = Examples = Retorna dados da tabela de exemplos";
-        }
-
-        public class Delete
-        {
-            public const string Summary = @"Deleta dados existentes";
-            public const string Description = @"Deleta dados existentes<br/><br/>
+            public const string Summary = @"Cria dado";
+            public const string Description = @"Criar dado na tabela<br/><br/>
             <strong>Banco de dados</strong><br/><br/>
             - Tabela = Examples = Retorna dados da tabela de exemplos";
         }
