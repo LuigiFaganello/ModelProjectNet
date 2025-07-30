@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "70892531-ce50-40be-81a3-3e8463377724",
+		"name": "Projeto de example - integration test",
+		"description": "Projeto de teste de integração para API de example.\n\nAba Variables contem todos os endpoints dos ambientes de teste ate produção\n\nAba pre-request Script contem os scripts que fazer o ajustes de todas as chamadas para o ambiente que sera testado no momento.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44605813"
+	},
+	"item": [
+		{
+			"name": "health",
+			"item": [
+				{
+					"name": "Health check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if( responseCode.code !== 200)\r",
+									"{\r",
+									"    throw new Error('Erro ao testar saude da do projeto. Teste sera interrompido !!');\r",
+									"}\r",
+									"\r",
+									"tests[\"Test OK\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_api}}/Healthcheck",
+							"host": [
+								"{{base_url_api}}"
+							],
+							"path": [
+								"Healthcheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "Login JWT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.clearEnvironmentVariable(\"_TOKEN\");",
+									"",
+									"if( responseCode.code !== 200)",
+									"{",
+									"    throw new Error('Erro ao obter token de acesso. Teste sera interrompido !!');",
+									"}",
+									"",
+									"pm.test(\"Token de autenticação gerado\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"var data = JSON.parse(responseBody)",
+									"postman.setEnvironmentVariable(\"_TOKEN\", data.access_token);",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "OS",
+								"value": "android",
+								"type": "text"
+							},
+							{
+								"key": "app-version",
+								"value": "1.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_token}}/api/login",
+							"host": [
+								"{{base_url_token}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Retorna lista de examples",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verifica se o status da response é 200\r",
+							"pm.test(\"Teste OK Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_api}}/api/v1/Example/",
+					"host": [
+						"{{base_url_api}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Example",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna example por zipCode - 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verifica se o status da response é 200\r",
+							"pm.test(\"Teste OK Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_api}}/api/v1/Example/:zipCode",
+					"host": [
+						"{{base_url_api}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Example",
+						":zipCode"
+					],
+					"variable": [
+						{
+							"key": "zipCode",
+							"value": "01311-903"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Não Retorna example por zipCode - 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verifica se o status da response é 200\r",
+							"pm.test(\"Teste OK Status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_api}}/api/v1/Example/:zipCode",
+					"host": [
+						"{{base_url_api}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Example",
+						":zipCode"
+					],
+					"variable": [
+						{
+							"key": "zipCode",
+							"value": "0000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar example",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verifica se o status da response é 200\r",
+							"pm.test(\"Teste OK Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"zipCode\": \"{{$timestamp}}\",\n  \"street\": \"{{$randomStreetName}}\",\n  \"complement\": \"{{$randomCountryCode}}\",\n  \"unit\": \"{{$randomCountryCode}}\",\n  \"neighborhood\": \"{{$randomStreetName}}\",\n  \"city\": \"{{$randomCity}}\",\n  \"state\": \"{{$randomCountryCode}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url_api}}/api/v1/Example",
+					"host": [
+						"{{base_url_api}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Example"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"postman.clearEnvironmentVariable(\"base_url_api\");",
+					"postman.clearEnvironmentVariable(\"base_url_token\");",
+					"",
+					"console.log(\"Definindo URL base do projeto\");",
+					"var urlProject = pm.collectionVariables.get(\"base_url_api_local\"); /*Valor do ambiente testado*/",
+					"",
+					"if(urlProject == '' || urlProject == null)",
+					"{",
+					"    throw new Error('Url base do projeto esta nulla !!');",
+					"}",
+					"",
+					"console.log(\"Url base do ambinete de teste\", urlProject);",
+					"postman.setEnvironmentVariable(\"base_url_api\", urlProject);",
+					"",
+					"console.log(\"Definindo URL base de autenticação\");",
+					"var urlLogin = pm.collectionVariables.get(\"base_url_login_local\"); /*Valor do ambiente testado*/",
+					"",
+					"if(urlLogin == '' || urlLogin == null)",
+					"{",
+					"    throw new Error('Url base do token esta nulla !!');",
+					"}",
+					"",
+					"console.log(\"Url base do ambinete de teste\", urlLogin);",
+					"postman.setEnvironmentVariable(\"base_url_token\", urlLogin);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url_api_dev",
+			"value": "https://localhost:5001"
+		},
+		{
+			"key": "base_url_api_prd",
+			"value": "https://localhost:5001"
+		},
+		{
+			"key": "base_url_api_local",
+			"value": "https://localhost:5001"
+		},
+		{
+			"key": "base_url_login_dev",
+			"value": "https://localhost:5002"
+		},
+		{
+			"key": "base_url_login_prd",
+			"value": "https://localhost:5002"
+		},
+		{
+			"key": "base_url_login_local",
+			"value": "https://localhost:5002",
+			"type": "string"
+		}
+	]
+}
