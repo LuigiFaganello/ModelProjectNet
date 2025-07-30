@@ -1,5 +1,9 @@
-﻿namespace Web.Api.Middleware
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Web.Api.Middleware
 {
+
+    [ExcludeFromCodeCoverage]
     internal class CorrelationMiddleware
     {
         internal const string CorrelationHeaderKey = "CorrelationId";

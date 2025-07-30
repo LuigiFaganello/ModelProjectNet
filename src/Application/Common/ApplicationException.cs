@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Common.Exceptions
+namespace Application.Common
 {
     public class ApplicationException : Exception
     {

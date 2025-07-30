@@ -50,17 +50,5 @@ namespace API.Controllers.V2
         {
             return Ok(await _exampleAppService.GetByZipCode(zipCode, cancellationToken));
         }
-
-        [HttpPost()]
-        [MapToApiVersion("2.0")]
-        [SwaggerOperation(Summary = ExampleControllerMarkdown.Post.Summary, Description = ExampleControllerMarkdown.Post.Description)]
-        [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode201)]
-        [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
-        [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
-        [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
-        public async Task<IActionResult> Post([FromBody] ExampleAppServiceDto ExampleAppServiceDto, CancellationToken cancellationToken)
-        {
-            return Created();
-        }
     }
 }

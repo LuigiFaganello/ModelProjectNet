@@ -1,9 +1,13 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
+using Application.Common;
 using Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Web.Api.Middleware
 {
+
+    [ExcludeFromCodeCoverage]
     public class GlobalExceptionMiddleware
     {
         private readonly RequestDelegate _next;
@@ -73,8 +77,8 @@ namespace Web.Api.Middleware
             return exception switch
             {
                 DomainException => LogLevel.Warning,
-                Application.Common.Exceptions.ValidationException => LogLevel.Warning,
-                Application.Common.Exceptions.ApplicationException => LogLevel.Warning,
+                ValidationException => LogLevel.Warning,
+                Application.Common.ApplicationException => LogLevel.Warning,
                 UnauthorizedAccessException => LogLevel.Warning,
                 ArgumentException => LogLevel.Warning,
                 InvalidOperationException => LogLevel.Warning,
@@ -127,8 +131,8 @@ namespace Web.Api.Middleware
                 BusinessRuleViolationException ex => (422, ex.ErrorCode, ex.Message, null),
 
                 // Application Exceptions
-                Application.Common.Exceptions.ValidationException ex => (400, ex.ErrorCode, ex.Message, ex.Errors),
-                Application.Common.Exceptions.ApplicationException ex => (500, ex.ErrorCode, ex.Message, null),
+                ValidationException ex => (400, ex.ErrorCode, ex.Message, ex.Errors),
+                Application.Common.ApplicationException ex => (500, ex.ErrorCode, ex.Message, null),
 
                 // Framework Exceptions (ordem importante: mais específico primeiro)
                 UnauthorizedAccessException => (401, "UNAUTHORIZED", "Access denied", null),
