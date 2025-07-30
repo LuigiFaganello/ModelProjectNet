@@ -39,7 +39,7 @@ namespace API.Configurations.Swagger
             var info = new OpenApiInfo
             {
                 Version = desc.ApiVersion.ToString(),
-                Title = "Projeto modelo em .Net",
+                Title = $"Projeto modelo em .Net - {desc.GroupName.ToUpperInvariant()}",
                 Description = "<div>O escopo deste documento tem como objetivo apresentar de maneira detalhada todas as APIs " +
                                 "para integração com modulo: XPTO.<br/>" +
                                 "<br/>" +

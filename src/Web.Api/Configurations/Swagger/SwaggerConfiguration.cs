@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace API.Configurations.Swagger
@@ -16,16 +18,15 @@ namespace API.Configurations.Swagger
 
             services.AddApiVersioning(opt =>
             {
-                opt.DefaultApiVersion = new ApiVersion(1, 0);
+                opt.DefaultApiVersion = new ApiVersion(1);
                 opt.AssumeDefaultVersionWhenUnspecified = true;
                 opt.ReportApiVersions = true;
                 opt.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
-                                                                new HeaderApiVersionReader("x-api-version"),
-                                                                new MediaTypeApiVersionReader("x-api-version"));
+                                                                new HeaderApiVersionReader("x-api-version"));
             })
             .AddApiExplorer(setup =>
             {
-                setup.GroupNameFormat = "'v'VVV";
+                setup.GroupNameFormat = "'v'V";
                 setup.SubstituteApiVersionInUrl = true;
             });
 
@@ -61,7 +62,8 @@ namespace API.Configurations.Swagger
                 s.EnableAnnotations();
             });
 
-            services.ConfigureOptions<ConfigureSwaggerOptions>();
+            services.AddEndpointsApiExplorer();
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
         }
 
         public static void UseSwaggerSetup(this WebApplication app)
