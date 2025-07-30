@@ -11,9 +11,8 @@ namespace API.Configurations.Swagger
     {
         public static void AddSwaggerConfiguration(this IServiceCollection services, IConfiguration _configuration)
         {
-            if (services == null) throw new ArgumentNullException(nameof(services));
-
-            if (_configuration == null) throw new ArgumentNullException(nameof(_configuration));
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(_configuration);
 
             services.AddApiVersioning(opt =>
             {
@@ -67,7 +66,7 @@ namespace API.Configurations.Swagger
 
         public static void UseSwaggerSetup(this WebApplication app)
         {
-            if (app == null) throw new ArgumentNullException(nameof(app));
+            ArgumentNullException.ThrowIfNull(app);
 
             app.UseSwagger(options =>
             {

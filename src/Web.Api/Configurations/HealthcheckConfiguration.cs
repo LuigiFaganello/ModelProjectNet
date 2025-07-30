@@ -7,7 +7,7 @@ namespace API.Configurations
     {
         public static void AddHealthcheckConfiguration(this IServiceCollection services)
         {
-            if (services == null) throw new ArgumentNullException(nameof(services));
+            ArgumentNullException.ThrowIfNull(services);
 
             services.AddHealthChecks();
 
@@ -15,7 +15,7 @@ namespace API.Configurations
 
         public static void UseHealthcheckSetup(this WebApplication app)
         {
-            if (app == null) throw new ArgumentNullException(nameof(app));
+            ArgumentNullException.ThrowIfNull(app);
 
             app.MapHealthChecks("/healthcheck");
         }
