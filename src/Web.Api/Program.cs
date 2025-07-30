@@ -3,8 +3,7 @@ using API.Configurations.Swagger;
 using Application;
 using Infrastructure;
 using Infrastructure.Configuration;
-using Serilog;
-using Web.Api.Extensions;
+using Web.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +27,7 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Settin
 
 var app = builder.Build();
 
-app.UseRequestContextLogging();
+app.UseMiddleware<CorrelationMiddleware>();
 app.MapControllers();
 app.UseCorsSetup();
 app.UseAuthorization();
