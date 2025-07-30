@@ -37,6 +37,18 @@ Esta estrutura em camadas garante que as mudanças em preocupações externas (p
 
 ![Diagrama](/docs/Desenho-de-arquitetura.svg)
 
+### C4 Model - Diagrama de contexto
+
+O diagrama de contexto do C4 Model é a representação de mais alto nível de um sistema de software. Ele mostra o sistema como uma "caixa preta", destacando suas interações com usuários e sistemas externos, sem entrar em detalhes técnicos. Serve para comunicar de forma simples e clara onde o sistema se encaixa no ambiente e quem interage com ele, sendo ideal para apresentações, documentação e alinhamento entre áreas técnicas e não técnicas. É o primeiro passo na modelagem arquitetural, preparando o terreno para níveis mais detalhados.
+
+![Diagrama](/docs/C4-Context.svg)
+
+### C4 Model - Diagrama de container   
+
+O diagrama de contêineres no C4 Model representa a estrutura interna de um sistema, mostrando como ele é dividido em partes executáveis chamadas de contêineres, como APIs, frontends, bancos de dados e serviços de background. Ele detalha as responsabilidades de cada contêiner, as tecnologias utilizadas e como esses contêineres se comunicam entre si e com usuários ou sistemas externos. Essa visão é útil para desenvolvedores e arquitetos, pois fornece uma compreensão clara de como o sistema é construído e como seus principais blocos se integram.
+
+![Diagrama](/docs/C4-Container.svg)
+
 ## Estrutura do Projeto
 
 O projeto é organizado em várias pastas, cada uma representando uma camada ou preocupação distinta dentro da Arquitetura Limpa.
