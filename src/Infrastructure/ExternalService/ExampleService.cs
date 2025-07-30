@@ -45,8 +45,8 @@ namespace Infrastructure.ExternalService
             }
             catch (Exception ex)
             {
-                _logger.LogError($"ERRO AO ENVIAR MENSAGEM AO CANAL DE MENSAGEM. REQUEST: ERRO: {ex.Message}");
-                return null;
+                _logger.LogError(ex, "Erro ao obter todos os exemplos: {Message}", ex.Message);
+                return new List<ExampleServiceDTO>() { };
             }
         }
     }

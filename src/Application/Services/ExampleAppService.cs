@@ -107,6 +107,7 @@ namespace Application.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao realizar o sync da tabela de exemplo por CEP: {Message}", ex.Message);
+                throw new Exception(ex.Message);
             }
         }
     }
