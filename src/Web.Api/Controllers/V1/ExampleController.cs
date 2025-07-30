@@ -2,9 +2,6 @@
 using Application.DTO;
 using Application.Services;
 using Asp.Versioning;
-using Infrastructure.ExternalService.Interface;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Web.Api.Controllers;
@@ -20,7 +17,8 @@ namespace API.Controllers.V1
     public class ExampleController : BaseController
     {
         private readonly IExampleAppService _exampleAppService;
-        public ExampleController(IExampleAppService exampleAppService, ILogger<ExampleController> logger)
+        public ExampleController(IExampleAppService exampleAppService, 
+                                 ILogger<ExampleController> logger)
             : base(logger)
         {
             _exampleAppService = exampleAppService;

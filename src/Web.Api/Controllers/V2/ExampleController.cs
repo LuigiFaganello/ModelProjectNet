@@ -2,8 +2,6 @@
 using Application.DTO;
 using Application.Services;
 using Asp.Versioning;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Web.Api.Controllers;
@@ -19,7 +17,8 @@ namespace API.Controllers.V2
     public class ExampleController : BaseController
     {
         private readonly IExampleAppService _exampleAppService;
-        public ExampleController(IExampleAppService exampleAppService, ILogger<ExampleController> logger)
+        public ExampleController(IExampleAppService exampleAppService, 
+                                 ILogger<ExampleController> logger)
             : base(logger)
         {
             _exampleAppService = exampleAppService;
@@ -35,7 +34,7 @@ namespace API.Controllers.V2
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-            return Ok(await _exampleAppService.GetAll(cancellationToken));
+            return HandleResult(await _exampleAppService.GetAll(cancellationToken));
         }
 
         [HttpGet("{zipCode}")]
@@ -48,7 +47,7 @@ namespace API.Controllers.V2
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
         public async Task<IActionResult> GetById(string zipCode, CancellationToken cancellationToken)
         {
-            return Ok(await _exampleAppService.GetByZipCode(zipCode, cancellationToken));
+            return HandleResult(await _exampleAppService.GetByZipCode(zipCode, cancellationToken));
         }
     }
 }
