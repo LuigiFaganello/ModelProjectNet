@@ -9,10 +9,6 @@ namespace Domain.Entities
 {
     public class Example : EntityBase
     {
-        public Example()
-        {
-                
-        }
         public Example(string zipCode, 
                        string street, 
                        string complement, 

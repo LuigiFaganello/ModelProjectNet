@@ -13,13 +13,8 @@ namespace Infrastructure.Repositories
         }
         public async Task<Example> GetByZipCodeAsync(string zipCode, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrWhiteSpace(zipCode))
-                return null;
-
-            var cleanZipCode = zipCode.Replace("-", "").Replace(".", "").Trim();
-
             return await _dbSet
-                .Where(x => x.ZipCode == zipCode || x.ZipCode == cleanZipCode)
+                .Where(x => x.ZipCode == zipCode)
                 .OrderByDescending(x => x.ZipCode)
                 .FirstOrDefaultAsync(cancellationToken);
         }

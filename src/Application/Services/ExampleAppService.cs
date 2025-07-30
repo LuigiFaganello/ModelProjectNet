@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Application.DTO;
+﻿using Application.DTO;
 using Domain.Common;
 using Domain.Entities;
 using Domain.Interfaces;
