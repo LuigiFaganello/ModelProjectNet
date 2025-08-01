@@ -11,6 +11,7 @@ using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Infrastructure
 {
@@ -22,7 +23,8 @@ namespace Infrastructure
             IConfiguration configuration) =>
             services
                 .AddServices()
-                .AddDatabase(configuration);
+                .AddDatabase(configuration)
+                .AddHealthChecks(configuration);
 
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
@@ -47,6 +49,19 @@ namespace Infrastructure
                     connectionString,
                     ServerVersion.AutoDetect(connectionString)
                 ));
+
+            return services;
+        }
+
+        private static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHealthChecks()
+                .AddMySql(
+                    connectionString: configuration.GetConnectionString("DefaultConnection"),
+                    name: "mysql-database",
+                    failureStatus: HealthStatus.Degraded,
+                    tags: new[] { "db", "mysql", "ready" },
+                    timeout: TimeSpan.FromSeconds(30));
 
             return services;
         }
