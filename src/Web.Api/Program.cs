@@ -3,15 +3,19 @@ using API.Configurations.Swagger;
 using Application;
 using Infrastructure;
 using Infrastructure.Configuration;
+using Serilog;
 using Web.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
-   .SetBasePath(builder.Environment.ContentRootPath)
-   .AddJsonFile("appsettings.json", true, true)
-   .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
-   .AddEnvironmentVariables();  
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json", true, true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
+    .AddEnvironmentVariables();
+
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddCorsConfiguration();
 builder.Services.AddSwaggerConfiguration(builder.Configuration);
@@ -20,8 +24,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services
-   .AddApplication()
-   .AddInfrastructure(builder.Configuration);
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
 
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Settings"));
 
