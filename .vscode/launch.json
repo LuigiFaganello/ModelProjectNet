@@ -44,6 +44,34 @@
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
             }
+        },
+        {
+            "name": "WKS - LOCAL",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/WorkerService/bin/Debug/net9.0/WorkerService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/WorkerService",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "WKS - HML",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/WorkerService/bin/Debug/net9.0/WorkerService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/WorkerService",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         }
     ]
 }
