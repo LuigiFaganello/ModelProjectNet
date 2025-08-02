@@ -12,6 +12,8 @@ namespace Web.Api.Controllers
         {
             _logger = logger;
         }
+
+        [ApiExplorerSettings(IgnoreApi = true)]
         protected IActionResult HandleResult<T>(Result<T> result)
         {
             return result.Match(
@@ -20,6 +22,7 @@ namespace Web.Api.Controllers
             );
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         protected IActionResult HandleResult(Result result)
         {
             if (result.IsSuccess)
@@ -28,6 +31,7 @@ namespace Web.Api.Controllers
             return HandleError(result.Error!);
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         protected IActionResult HandleNoContentOrNotFound(Result result)
         {
             if (result.IsSuccess)
@@ -36,6 +40,7 @@ namespace Web.Api.Controllers
             return HandleError(result.Error!);
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         protected IActionResult HandleNoContentOrNotFound<T>(Result<T> result)
         {
             if (result.IsSuccess)
@@ -43,6 +48,8 @@ namespace Web.Api.Controllers
 
             return HandleError(result.Error!);
         }
+
+        [ApiExplorerSettings(IgnoreApi = true)]
         protected IActionResult HandleError(Error error)
         {
             var errorResponse = CreateStandardErrorResponse(error);
@@ -60,6 +67,8 @@ namespace Web.Api.Controllers
                 _ => StatusCode(500, errorResponse)
             };
         }
+
+        [ApiExplorerSettings(IgnoreApi = true)]
         private object CreateStandardErrorResponse(Error error)
         {
             var baseResponse = new
