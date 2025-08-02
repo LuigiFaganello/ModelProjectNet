@@ -2,7 +2,6 @@
 
 namespace Application.Common
 {
-    [ExcludeFromCodeCoverage]
     public class ApplicationException : Exception
     {
         public string ErrorCode { get; }
