@@ -2,7 +2,6 @@
 
 namespace Web.Api.Middleware
 {
-
     [ExcludeFromCodeCoverage]
     internal class CorrelationMiddleware
     {

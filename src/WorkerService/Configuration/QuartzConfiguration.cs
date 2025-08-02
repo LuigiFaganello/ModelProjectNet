@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Infrastructure.Configuration;
 using Quartz;
 
 namespace WorkerService.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public static class QuartzConfiguration
     {
         public static IServiceCollection AddQuartzJobsFromConfig(this IServiceCollection services, AppSettings appSettings)

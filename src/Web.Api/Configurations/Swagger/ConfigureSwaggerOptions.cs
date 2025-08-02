@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace API.Configurations.Swagger
+namespace Web.Api.Configurations.Swagger
 {
     [ExcludeFromCodeCoverage]
     public class ConfigureSwaggerOptions

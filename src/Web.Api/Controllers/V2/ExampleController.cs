@@ -1,12 +1,12 @@
-﻿using API.Markdown.V1;
-using Application.DTO;
+﻿using Application.DTO;
 using Application.Services;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using Web.Api.Controllers;
+using Web.Api.Markdown.V1;
 
-namespace API.Controllers.V2
+
+namespace Web.Api.Controllers.V2
 {
     [ApiController]
     [ApiVersion("2.0")]

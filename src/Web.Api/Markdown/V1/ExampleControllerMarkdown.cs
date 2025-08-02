@@ -1,5 +1,8 @@
-﻿namespace API.Markdown.V1
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Web.Api.Markdown.V1
 {
+    [ExcludeFromCodeCoverage]
     public class ExampleControllerMarkdown
     {
         public class GetAll

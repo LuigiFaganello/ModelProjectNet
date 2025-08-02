@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace API.Configurations
+namespace Web.Api.Configurations
 {
 
     [ExcludeFromCodeCoverage]

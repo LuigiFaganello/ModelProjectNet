@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public class AppSettings
     {
         public Viacep Viacep { get; set; }

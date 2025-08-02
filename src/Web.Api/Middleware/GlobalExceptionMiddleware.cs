@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Web.Api.Middleware
 {
-
     [ExcludeFromCodeCoverage]
     public class GlobalExceptionMiddleware
     {

@@ -3,7 +3,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace API.Configurations
+namespace Web.Api.Configurations
 {
     [ExcludeFromCodeCoverage]
     public static class HealthcheckConfiguration

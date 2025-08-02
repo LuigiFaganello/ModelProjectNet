@@ -1,5 +1,4 @@
 using Quartz;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using Application.Services;
 

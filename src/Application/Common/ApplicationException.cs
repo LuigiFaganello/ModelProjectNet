@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Application.Common
 {
+    [ExcludeFromCodeCoverage]
     public class ApplicationException : Exception
     {
         public string ErrorCode { get; }

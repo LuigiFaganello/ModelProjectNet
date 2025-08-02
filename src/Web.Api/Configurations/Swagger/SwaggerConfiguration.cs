@@ -5,8 +5,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Web.Api.Middleware;
 
-namespace API.Configurations.Swagger
+namespace Web.Api.Configurations.Swagger
 {
     [ExcludeFromCodeCoverage]
     public static class SwaggerConfiguration
@@ -91,6 +92,8 @@ namespace API.Configurations.Swagger
                         description.GroupName.ToUpperInvariant());
                 }
             });
+
+            app.UseMiddleware<SwaggerAuthMiddleware>();
         }
     }
 }

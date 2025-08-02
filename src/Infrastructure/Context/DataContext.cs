@@ -1,10 +1,10 @@
-﻿using System.Reflection.Emit;
+﻿using System.Diagnostics.CodeAnalysis;
 using Domain.Entities;
-using Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Context
 {
+    [ExcludeFromCodeCoverage]
     public class DataContext : DbContext
     {
         public DbSet<Example> Examples { get; set; }

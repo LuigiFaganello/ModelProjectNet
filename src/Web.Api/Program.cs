@@ -1,9 +1,9 @@
-using API.Configurations;
-using API.Configurations.Swagger;
 using Application;
 using Infrastructure;
 using Infrastructure.Configuration;
 using Serilog;
+using Web.Api.Configurations;
+using Web.Api.Configurations.Swagger;
 using Web.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);

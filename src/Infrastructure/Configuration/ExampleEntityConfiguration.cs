@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public class ExampleEntityConfiguration : IEntityTypeConfiguration<Example>
     {
         public void Configure(EntityTypeBuilder<Example> builder)
