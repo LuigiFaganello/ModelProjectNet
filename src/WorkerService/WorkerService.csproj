@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-WorkerService-ac17e60a-fa33-48f7-b762-5b4457fc1dd3</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
