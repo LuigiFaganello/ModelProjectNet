@@ -69,7 +69,6 @@ namespace Web.Api.Configurations.Swagger
             var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
             app.UseSwaggerUI(options =>
             {
-                options.InjectStylesheet("/swagger/css/custom.css");
                 options.DocExpansion(DocExpansion.None);
                 foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
                 {
