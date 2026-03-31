@@ -1,9 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Asp.Versioning.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
+﻿using Asp.Versioning.ApiExplorer;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Web.Api.Configurations.Swagger
 {
@@ -44,10 +43,10 @@ namespace Web.Api.Configurations.Swagger
                                 "para integração com modulo: XPTO.<br/>" +
                                 "<br/>" +
                                 "<strong>Tecnologias / Ferramentas utilizadas</strong><br/><br/>" +
-                                "- .Net Core 9<br/> " +
+                                "- .Net Core 10<br/> " +
                                 "- Mysql<br/> " +
                                 "<br/>" +
-                                "Qualquer dúvida ou problema favor entrar em contato com a squad XPTO.<br/>",
+                                "Qualquer dúvida ou problema favor entrar em contato.<br/>",
                 Contact = new OpenApiContact { Name = "Nome da empresa", Email = "email@email.br" }
             };
 

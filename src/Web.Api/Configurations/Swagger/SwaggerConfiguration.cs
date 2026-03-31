@@ -1,10 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Diagnostics.CodeAnalysis;
 using Web.Api.Middleware;
 
 namespace Web.Api.Configurations.Swagger
@@ -43,21 +43,6 @@ namespace Web.Api.Configurations.Swagger
                     Type = SecuritySchemeType.ApiKey
                 });
 
-                s.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        new string[] {}
-                    }
-                });
-
                 s.ResolveConflictingActions(a => a.First());
 
                 s.EnableAnnotations();
@@ -84,7 +69,6 @@ namespace Web.Api.Configurations.Swagger
             var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
             app.UseSwaggerUI(options =>
             {
-                options.InjectStylesheet("/swagger/css/custom.css");
                 options.DocExpansion(DocExpansion.None);
                 foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
                 {
