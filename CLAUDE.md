@@ -25,9 +25,11 @@ dotnet ef database update --project src/Infrastructure --startup-project src/Web
 
 Targets **.NET 10** (`net10.0`). The README still mentions ".NET Core 9" and a WorkerService — both are stale; the WorkerService project was removed.
 
-### EF Core version constraint (important)
+### Dependencies & EF Core version constraint (important)
 
-Keep **all** EF Core packages on the **9.x** line. `Pomelo.EntityFrameworkCore.MySql` (the MySQL provider) has no EF Core 10 release, so EF Core 9 is the ceiling even though the rest of the solution uses `Microsoft.Extensions.*` 10.x. Bumping a test/runtime EF package (e.g. `Microsoft.EntityFrameworkCore.InMemory`) to 10.x produces a runtime `MissingMethodException` because EF Core 9 assemblies are the ones actually loaded. `Infrastructure` also still pins `Microsoft.EntityFrameworkCore.Design` at 8.0.7 (design-time only; ideally aligned to 9.x for migration tooling).
+Package versions are managed centrally via **Central Package Management**: `Directory.Packages.props` (repo root) holds every `<PackageVersion>`, and the `.csproj` files carry `<PackageReference>` **without** a `Version`. Add or bump dependencies in `Directory.Packages.props`, not in the project files.
+
+Keep **all** EF Core packages on the **9.x** line (`Pomelo.EntityFrameworkCore.MySql`, `Microsoft.EntityFrameworkCore.Design`, `Microsoft.EntityFrameworkCore.InMemory`). `Pomelo` has no EF Core 10 release, so EF Core 9 is the ceiling even though the rest of the solution uses `Microsoft.Extensions.*` 10.x. Bumping any EF package to 10.x produces a runtime `MissingMethodException` because EF Core 9 assemblies are the ones actually loaded.
 
 ## Commit conventions
 
@@ -76,8 +78,12 @@ Interfaces in `Domain/Interfaces` (`IRepositoryBase`, `IExampleRepository`), imp
 
 - **ViaCEP** — Brazilian postal-code/address API. `Infrastructure/ExternalService/ExampleService.cs` uses an injected `HttpClient` (registered via `AddHttpClient()`) whose `BaseAddress`/`Timeout` come from `AppSettings.Viacep`. HTTP calls go through `HttpClientExtensions.SendRequestAsync<TReq,TResp>`. The service swallows errors and returns an empty collection rather than throwing.
 - **MySQL** — Pomelo provider with `ServerVersion.AutoDetect(connectionString)`; `DataContextFactory` (`IDesignTimeDbContextFactory`) enables design-time migrations by reading `../Web.Api/appsettings.json`.
-- **Seq** — Serilog sink for structured logs, configured entirely from `appsettings.json` (`builder.Host.UseSerilog(... ReadFrom.Configuration ...)`).
+- **Seq** — Serilog sink for structured logs, configured from `appsettings.json` (`builder.Host.UseSerilog(... ReadFrom.Configuration ...)`); both Console and Seq sinks are active, with `serverUrl` defaulting to `http://localhost:5341` (override per environment).
 - **Health checks** — MySQL health check tagged `ready`, registered in `AddInfrastructure`.
+
+### Observability
+
+`CorrelationMiddleware` (first in the pipeline) reads an incoming `X-Correlation-Id` header or generates a GUID, stores it in `HttpContext.Items["CorrelationId"]`, echoes it back on the response header, and pushes it into Serilog's `LogContext` — so **every log line during the request carries `CorrelationId`** (the Console template and Seq both surface it). `GlobalExceptionMiddleware` includes the same `correlationId` in error response bodies. When adding logging, rely on the ambient `LogContext` property rather than threading the id manually.
 
 ### Configuration
 

@@ -99,7 +99,8 @@ namespace Web.Api.Middleware
                 timestamp = DateTime.UtcNow,
                 path = context.Request.Path.Value,
                 method = context.Request.Method,
-                traceId = context.TraceIdentifier
+                traceId = context.TraceIdentifier,
+                correlationId = GetCorrelationId(context)
             };
 
             if (validationErrors != null && validationErrors.Any())
@@ -112,6 +113,7 @@ namespace Web.Api.Middleware
                     baseResponse.path,
                     baseResponse.method,
                     baseResponse.traceId,
+                    baseResponse.correlationId,
                     details = validationErrors
                 };
                 return (statusCode, responseWithDetails);
@@ -163,6 +165,14 @@ namespace Web.Api.Middleware
 
             // Em desenvolvimento, mostrar detalhes
             return exception.Message;
+        }
+
+        private static string GetCorrelationId(HttpContext context)
+        {
+            return context.Items.TryGetValue(CorrelationMiddleware.CorrelationItemKey, out var value)
+                && value is string correlationId
+                ? correlationId
+                : context.TraceIdentifier;
         }
 
         private static bool IsUniqueConstraintViolation(DbUpdateException ex)

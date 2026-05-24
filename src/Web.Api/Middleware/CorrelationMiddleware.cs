@@ -1,11 +1,17 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
+using Serilog.Context;
 
 namespace Web.Api.Middleware
 {
     [ExcludeFromCodeCoverage]
-    internal class CorrelationMiddleware
+    public class CorrelationMiddleware
     {
-        internal const string CorrelationHeaderKey = "CorrelationId";
+        /// <summary>Header HTTP usado para receber/retornar o id de correlação.</summary>
+        public const string CorrelationHeaderKey = "X-Correlation-Id";
+
+        /// <summary>Chave em <see cref="HttpContext.Items"/> onde o id fica disponível para o restante do pipeline.</summary>
+        public const string CorrelationItemKey = "CorrelationId";
+
         private readonly RequestDelegate _next;
 
         public CorrelationMiddleware(RequestDelegate next)
@@ -15,11 +21,34 @@ namespace Web.Api.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            var correlationId = Guid.NewGuid();
+            var correlationId = GetOrCreateCorrelationId(context);
 
-            context.Request?.Headers.Append(CorrelationHeaderKey, correlationId.ToString());
+            // Disponibiliza o id para o restante do pipeline (ex.: middleware de exceção).
+            context.Items[CorrelationItemKey] = correlationId;
 
-            await _next.Invoke(context);
+            // Garante que o id seja devolvido ao cliente, antes de o corpo da resposta começar a ser escrito.
+            context.Response.OnStarting(() =>
+            {
+                context.Response.Headers[CorrelationHeaderKey] = correlationId;
+                return Task.CompletedTask;
+            });
+
+            // Enriquece TODOS os logs Serilog emitidos durante a requisição com o id de correlação.
+            using (LogContext.PushProperty(CorrelationItemKey, correlationId))
+            {
+                await _next.Invoke(context);
+            }
+        }
+
+        private static string GetOrCreateCorrelationId(HttpContext context)
+        {
+            if (context.Request.Headers.TryGetValue(CorrelationHeaderKey, out var existing)
+                && !string.IsNullOrWhiteSpace(existing))
+            {
+                return existing.ToString();
+            }
+
+            return Guid.NewGuid().ToString();
         }
     }
 }
