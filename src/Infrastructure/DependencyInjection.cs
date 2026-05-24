@@ -39,7 +39,7 @@ namespace Infrastructure
 
         private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = GetConnectionString(configuration);
 
             services.AddDbContext<DataContext>(options =>
                 options.UseMySql(
@@ -54,13 +54,19 @@ namespace Infrastructure
         {
             services.AddHealthChecks()
                 .AddMySql(
-                    connectionString: configuration.GetConnectionString("DefaultConnection"),
+                    connectionString: GetConnectionString(configuration),
                     name: "mysql-database",
                     failureStatus: HealthStatus.Degraded,
                     tags: new[] { "db", "mysql", "ready" },
                     timeout: TimeSpan.FromSeconds(30));
 
             return services;
+        }
+
+        private static string GetConnectionString(IConfiguration configuration)
+        {
+            return configuration.GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException("Connection string 'DefaultConnection' was not found.");
         }
     }
 }

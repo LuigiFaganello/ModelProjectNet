@@ -1,41 +1,39 @@
-﻿using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
     public interface IRepositoryBase<TEntity> where TEntity : class
     {
         // Métodos síncronos
-        TEntity GetById(object id);
-        TEntity GetByIdWithIncludes(object id, params Expression<Func<TEntity, object>>[] includes);
+        TEntity? GetById(object id);
+        TEntity? GetByIdWithIncludes(object id, params Expression<Func<TEntity, object>>[] includes);
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> GetAllWithIncludes(params Expression<Func<TEntity, object>>[] includes);
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> FindWithIncludes(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes);
-        TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
-        TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
+        TEntity? SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
+        TEntity? FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
         bool Any(Expression<Func<TEntity, bool>> predicate);
-        int Count(Expression<Func<TEntity, bool>> predicate = null);
+        int Count(Expression<Func<TEntity, bool>>? predicate = null);
 
         // Métodos assíncronos
-        Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default);
-        Task<TEntity> GetByIdWithIncludesAsync(object id, CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includes);
+        Task<TEntity?> GetByIdAsync(object id, CancellationToken cancellationToken = default);
+        Task<TEntity?> GetByIdWithIncludesAsync(object id, CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includes);
         Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<IEnumerable<TEntity>> GetAllWithIncludesAsync(CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includes);
         Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
         Task<IEnumerable<TEntity>> FindWithIncludesAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includes);
-        Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
-        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
+        Task<TEntity?> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
+        Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
-        Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null, CancellationToken cancellationToken = default);
+        Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default);
 
         // Paginação
         Task<(IEnumerable<TEntity> Items, int TotalCount)> GetPagedAsync(
             int pageNumber,
             int pageSize,
-            Expression<Func<TEntity, bool>> predicate = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            Expression<Func<TEntity, bool>>? predicate = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
             CancellationToken cancellationToken = default,
             params Expression<Func<TEntity, object>>[] includes);
 

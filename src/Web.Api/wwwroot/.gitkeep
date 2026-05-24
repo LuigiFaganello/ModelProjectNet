@@ -1,0 +1,2 @@
+# Mantém o diretório wwwroot versionado.
+# Web root servido por app.UseStaticFiles() (ex.: assets customizados da UI do Swagger).

@@ -11,6 +11,6 @@ namespace Domain.Interfaces
 {
     public interface IExampleRepository : IRepositoryBase<Example>
     {
-        Task<Example> GetByZipCodeAsync(string zipCode, CancellationToken cancellationToken);
+        Task<Example?> GetByZipCodeAsync(string zipCode, CancellationToken cancellationToken);
     }
 }

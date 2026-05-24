@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,12 +17,12 @@ namespace Infrastructure.Repositories
 
         #region Métodos síncronos
 
-        public virtual TEntity GetById(object id)
+        public virtual TEntity? GetById(object id)
         {
             return _dbSet.Find(id);
         }
 
-        public virtual TEntity GetByIdWithIncludes(object id, params Expression<Func<TEntity, object>>[] includes)
+        public virtual TEntity? GetByIdWithIncludes(object id, params Expression<Func<TEntity, object>>[] includes)
         {
             var query = _dbSet.AsQueryable();
 
@@ -75,12 +75,12 @@ namespace Infrastructure.Repositories
             return query.Where(predicate).ToList();
         }
 
-        public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity? SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return _dbSet.SingleOrDefault(predicate);
         }
 
-        public virtual TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity? FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return _dbSet.FirstOrDefault(predicate);
         }
@@ -90,7 +90,7 @@ namespace Infrastructure.Repositories
             return _dbSet.Any(predicate);
         }
 
-        public virtual int Count(Expression<Func<TEntity, bool>> predicate = null)
+        public virtual int Count(Expression<Func<TEntity, bool>>? predicate = null)
         {
             return predicate == null ? _dbSet.Count() : _dbSet.Count(predicate);
         }
@@ -99,12 +99,12 @@ namespace Infrastructure.Repositories
 
         #region Métodos assíncronos
 
-        public virtual async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity?> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
             return await _dbSet.FindAsync(new object[] { id }, cancellationToken);
         }
 
-        public virtual async Task<TEntity> GetByIdWithIncludesAsync(object id, CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includes)
+        public virtual async Task<TEntity?> GetByIdWithIncludesAsync(object id, CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includes)
         {
             var query = _dbSet.AsQueryable();
 
@@ -156,12 +156,12 @@ namespace Infrastructure.Repositories
             return await query.Where(predicate).ToListAsync(cancellationToken);
         }
 
-        public virtual async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity?> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             return await _dbSet.SingleOrDefaultAsync(predicate, cancellationToken);
         }
 
-        public virtual async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             return await _dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
         }
@@ -171,7 +171,7 @@ namespace Infrastructure.Repositories
             return await _dbSet.AnyAsync(predicate, cancellationToken);
         }
 
-        public virtual async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null, CancellationToken cancellationToken = default)
+        public virtual async Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default)
         {
             return predicate == null
                 ? await _dbSet.CountAsync(cancellationToken)
@@ -185,8 +185,8 @@ namespace Infrastructure.Repositories
         public virtual async Task<(IEnumerable<TEntity> Items, int TotalCount)> GetPagedAsync(
             int pageNumber,
             int pageSize,
-            Expression<Func<TEntity, bool>> predicate = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            Expression<Func<TEntity, bool>>? predicate = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
             CancellationToken cancellationToken = default,
             params Expression<Func<TEntity, object>>[] includes)
         {

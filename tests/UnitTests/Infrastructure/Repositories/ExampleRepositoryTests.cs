@@ -40,7 +40,7 @@ namespace UnitTests.Infrastructure.Repositories
 
                 // Assert
                 result.Should().NotBeNull();
-                result.ZipCode.Should().Be(zipCode);
+                result!.ZipCode.Should().Be(zipCode);
             }
         }
 

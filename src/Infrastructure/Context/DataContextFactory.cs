@@ -15,7 +15,8 @@ namespace Infrastructure.Context
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration.GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException("Connection string 'DefaultConnection' was not found.");
 
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))

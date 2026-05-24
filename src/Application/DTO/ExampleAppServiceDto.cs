@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Application.DTO
 {
     public class ExampleAppServiceDto
     {
-        public string ZipCode { get; set; }
-        public string Street { get; set; }
-        public string Complement { get; set; }
-        public string Unit { get; set; }
-        public string Neighborhood { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
+        public string ZipCode { get; set; } = string.Empty;
+        public string Street { get; set; } = string.Empty;
+        public string Complement { get; set; } = string.Empty;
+        public string Unit { get; set; } = string.Empty;
+        public string Neighborhood { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string State { get; set; } = string.Empty;
     }
 }

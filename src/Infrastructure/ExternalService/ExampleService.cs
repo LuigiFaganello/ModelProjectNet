@@ -41,7 +41,7 @@ namespace Infrastructure.ExternalService
 
                 response.EnsureSuccessStatusCode();
 
-                return content;
+                return content ?? Enumerable.Empty<ExampleServiceDTO>();
             }
             catch (Exception ex)
             {

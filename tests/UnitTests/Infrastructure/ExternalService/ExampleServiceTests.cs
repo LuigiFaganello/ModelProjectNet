@@ -91,9 +91,9 @@ namespace UnitTests.Infrastructure.ExternalService
                 x => x.Log(
                     It.Is<LogLevel>(l => l == LogLevel.Error),
                     It.IsAny<EventId>(),
-                    It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("Erro ao obter todos os exemplos")),
+                    It.Is<It.IsAnyType>((v, t) => v != null && v.ToString()!.Contains("Erro ao obter todos os exemplos")),
                     It.IsAny<Exception>(),
-                    It.Is<Func<It.IsAnyType, Exception, string>>((v, t) => true)),
+                    It.Is<Func<It.IsAnyType, Exception?, string>>((v, t) => true)),
                 Times.Once);
         }
     }

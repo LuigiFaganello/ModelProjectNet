@@ -21,9 +21,17 @@ dotnet test --filter "FullyQualifiedName~ExampleRepositoryTests.AddAsync_ShouldA
 # EF Core migrations (run from repo root)
 dotnet ef migrations add <Name> --project src/Infrastructure --startup-project src/Web.Api
 dotnet ef database update --project src/Infrastructure --startup-project src/Web.Api
+
+# Local environment (API + MySQL + Seq)
+docker compose up --build           # API on :8080, Seq UI on :8081, MySQL on :3306
 ```
 
 Targets **.NET 10** (`net10.0`). The README still mentions ".NET Core 9" and a WorkerService — both are stale; the WorkerService project was removed.
+
+### Build conventions & CI
+
+- **Nullable reference types and .NET analyzers are enabled solution-wide** via `Directory.Build.props` (repo root); `.editorconfig` holds the formatting/style rules. The build is warning-clean — keep it that way (annotate nullability rather than suppressing).
+- **CI**: `.github/workflows/ci.yml` runs restore → build (`Release`) → test with coverage on push/PR to `main`.
 
 ### Dependencies & EF Core version constraint (important)
 

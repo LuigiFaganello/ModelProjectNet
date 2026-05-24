@@ -10,7 +10,7 @@ namespace Infrastructure.Repositories
         public ExampleRepository(DataContext context) : base(context)
         {
         }
-        public async Task<Example> GetByZipCodeAsync(string zipCode, CancellationToken cancellationToken)
+        public async Task<Example?> GetByZipCodeAsync(string zipCode, CancellationToken cancellationToken)
         {
             return await _dbSet
                 .Where(x => x.ZipCode == zipCode)

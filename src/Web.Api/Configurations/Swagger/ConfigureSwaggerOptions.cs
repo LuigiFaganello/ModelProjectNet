@@ -28,7 +28,7 @@ namespace Web.Api.Configurations.Swagger
             }
         }
 
-        public void Configure(string name, SwaggerGenOptions options)
+        public void Configure(string? name, SwaggerGenOptions options)
         {
             Configure(options);
         }

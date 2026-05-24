@@ -1,4 +1,3 @@
-
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http.Headers;
@@ -18,19 +17,22 @@ namespace Web.Api.Middleware
         {
             if (context.Request.Path.StartsWithSegments("/swagger"))
             {
-                string authHeader = context.Request.Headers["Authorization"];
+                string? authHeader = context.Request.Headers["Authorization"];
                 if (authHeader != null && authHeader.StartsWith("Basic "))
                 {
                     var header = AuthenticationHeaderValue.Parse(authHeader);
-                    var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(header.Parameter)).Split(':');
-                    var username = credentials.FirstOrDefault();
-                    var password = credentials.LastOrDefault();
-                    var swaggerAuth = configuration.GetSection("SwaggerBasicAuth");
-
-                    if (swaggerAuth["UserName"] == username && swaggerAuth["Password"] == password)
+                    if (!string.IsNullOrEmpty(header.Parameter))
                     {
-                        await _next(context);
-                        return;
+                        var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(header.Parameter)).Split(':');
+                        var username = credentials.FirstOrDefault();
+                        var password = credentials.LastOrDefault();
+                        var swaggerAuth = configuration.GetSection("SwaggerBasicAuth");
+
+                        if (swaggerAuth["UserName"] == username && swaggerAuth["Password"] == password)
+                        {
+                            await _next(context);
+                            return;
+                        }
                     }
                 }
                 context.Response.Headers["WWW-Authenticate"] = "Basic";
