@@ -11,7 +11,6 @@ Este projeto é uma aplicação .NET estruturada seguindo os princípios da Arqu
         *   [Domain/](#domain)
         *   [Infrastructure/](#infrastructure)
         *   [Web.Api/](#webapi)
-        *   [WorkerService/](#workerservice)
     *   [tests/](#tests)
         *   [UnitTests/](#unittests)
 3.  [Tecnologias e Bibliotecas](#tecnologias-e-bibliotecas)
@@ -19,7 +18,6 @@ Este projeto é uma aplicação .NET estruturada seguindo os princípios da Arqu
     *   [Camada de Domínio](#camada-de-domínio)
     *   [Camada de Infraestrutura](#camada-de-infraestrutura)
     *   [Camada Web.Api](#camada-webapi)
-    *   [Camada WorkerService](#camada-workerservice)
     *   [Projeto UnitTests](#projeto-unittests)
 
 ## Visão Geral da Arquitetura
@@ -31,7 +29,7 @@ As principais camadas são:
 *   **Domínio (Entidades e Regras de Negócio):** A camada mais interna, contendo a lógica de negócio central e as entidades. Não possui dependências de outras camadas.
 *   **Aplicação (Casos de Uso e Serviços de Aplicação):** Esta camada orquestra o fluxo de dados de e para a camada de Domínio. Ela define os casos de uso da aplicação e depende apenas da camada de Domínio.
 *   **Infraestrutura (Preocupações Externas):** Esta camada lida com todas as interações externas, como acesso a banco de dados, APIs externas e implementações específicas de frameworks. Ela depende da camada de Domínio e implementa interfaces definidas nas camadas de Domínio e Aplicação.
-*   **Apresentação (Web.Api e WorkerService):** Estas são as camadas mais externas, responsáveis por apresentar dados ao usuário ou executar tarefas em segundo plano. Elas dependem das camadas de Aplicação e Infraestrutura.
+*   **Apresentação (Web.Api):** A camada mais externa, responsável por expor os dados ao usuário por meio de uma API RESTful. Depende das camadas de Aplicação e Infraestrutura.
 
 Esta estrutura em camadas garante que as mudanças em preocupações externas (por exemplo, a troca de bancos de dados) não afetem a lógica de negócio central.
 
@@ -132,25 +130,10 @@ Este projeto é a camada de apresentação da API RESTful da aplicação. Ele ex
 *   **`Middleware/`**: Middlewares personalizados para processamento de requisições.
     *   **`CorrelationMiddleware.cs`**: Middleware para adicionar IDs de correlação às requisições.
     *   **`GlobalExceptionMiddleware.cs`**: Middleware para tratamento global de exceções.
+    *   **`SwaggerAuthMiddleware.cs`**: Middleware que protege a UI do Swagger com autenticação HTTP Basic (seção `SwaggerBasicAuth`).
 *   **`Properties/`**: Propriedades específicas do projeto.
     *   **`launchSettings.json`**: Perfis de depuração e inicialização.
 *   **`wwwroot/`**: Arquivos estáticos servidos pela aplicação web (por exemplo, ativos personalizados da UI do Swagger).
-
-#### `WorkerService/`
-
-Este projeto é um serviço em segundo plano que pode executar tarefas agendadas ou operações de longa duração.
-
-*   **`WorkerService.csproj`**: Arquivo de projeto para o WorkerService.
-*   **`appsettings.json`**: Configurações da aplicação para o serviço de worker.
-*   **`Dockerfile`**: Dockerfile para conteinerizar o serviço de worker.
-*   **`Program.cs`**: Ponto de entrada da aplicação Worker Service.
-*   **`Configuration/`**: Configuração para o serviço de worker.
-    *   **`QuartzConfiguration.cs`**: Configuração para o agendador Quartz.NET.
-*   **`Jobs/`**: Implementações de jobs em segundo plano.
-    *   **`ExampleJob.cs`**: Um job em segundo plano de exemplo.
-    *   **`ExampleSecondJob.cs`**: Outro job em segundo plano de exemplo.
-*   **`Properties/`**: Propriedades específicas do projeto.
-    *   **`launchSettings.json`**: Perfis de depuração e inicialização.
 
 ### `tests/`
 
@@ -170,7 +153,7 @@ Este projeto contém testes de unidade para as várias camadas da aplicação, g
 
 Esta seção lista as principais tecnologias e pacotes NuGet usados em cada projeto.
 
-- .Net Core 9
+- .NET 10
 - MySql
 - Docker
 
@@ -203,12 +186,6 @@ Esta seção lista as principais tecnologias e pacotes NuGet usados em cada proj
 *   **`Swashbuckle.AspNetCore.Annotations`**: Fornece atributos para aprimorar a documentação Swagger.
 *   **`Asp.Versioning.Mvc`**: Versionamento de API para ASP.NET Core MVC.
 *   **`Asp.Versioning.Mvc.ApiExplorer`**: Integração do API Explorer para versionamento de API.
-
-### Camada WorkerService
-
-*   **`Microsoft.Extensions.Hosting`**: Fornece abstrações para hospedar serviços em segundo plano.
-*   **`Quartz`**: Uma biblioteca de agendamento robusta para .NET.
-*   **`Quartz.Extensions.Hosting`**: Integra o Quartz.NET com `Microsoft.Extensions.Hosting`.
 
 ### Projeto UnitTests
 

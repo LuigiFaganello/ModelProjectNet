@@ -29,6 +29,15 @@ Targets **.NET 10** (`net10.0`). The README still mentions ".NET Core 9" and a W
 
 Keep **all** EF Core packages on the **9.x** line. `Pomelo.EntityFrameworkCore.MySql` (the MySQL provider) has no EF Core 10 release, so EF Core 9 is the ceiling even though the rest of the solution uses `Microsoft.Extensions.*` 10.x. Bumping a test/runtime EF package (e.g. `Microsoft.EntityFrameworkCore.InMemory`) to 10.x produces a runtime `MissingMethodException` because EF Core 9 assemblies are the ones actually loaded. `Infrastructure` also still pins `Microsoft.EntityFrameworkCore.Design` at 8.0.7 (design-time only; ideally aligned to 9.x for migration tooling).
 
+## Commit conventions
+
+This repo enforces a custom commit format (see `.claude/skills/conventional-commits/SKILL.md`; the `/commit` command gives a guided flow). It is **not** standard Conventional Commits:
+
+- `<type>: (#<issue>) <issue_name> - <description>.` when a GitHub issue applies, else `<type>: <description>.` Multiline uses a `:`-terminated first line followed by `- `/`.`-delimited bullets.
+- `<type>` is exactly one of `New feature`, `Fix issue`, `Other`.
+- Present-tense imperative; single-line messages end with `.`. Keep commits atomic (one concern each).
+- **Never add trailers** — no "Generated with Claude Code", author, or `Co-Authored-By` lines. This overrides the usual default of appending a co-author trailer.
+
 ## Architecture
 
 Clean Architecture, four layers. Dependency rule: outer depends on inner; inner never references outer.
@@ -72,6 +81,6 @@ Interfaces in `Domain/Interfaces` (`IRepositoryBase`, `IExampleRepository`), imp
 
 ### Configuration
 
-- Strongly-typed settings: `Infrastructure/Configuration/AppSettings.cs`, bound from the `"Settings"` section. (Note: `AppSettings` still contains a `QuartzJobs` list left over from the removed WorkerService — currently unused.)
+- Strongly-typed settings: `Infrastructure/Configuration/AppSettings.cs`, bound from the `"Settings"` section (currently holds the ViaCEP base URL/timeout).
 - Connection string `DefaultConnection`, ViaCEP base URL/timeout, and `SwaggerBasicAuth` credentials live in `appsettings.json` / `appsettings.Development.json`.
 - **Swagger is gated by HTTP Basic Auth** via `SwaggerAuthMiddleware` (checks the `SwaggerBasicAuth` section for any path under `/swagger`); it is registered at the end of `UseSwaggerSetup`.

@@ -1,4 +1,4 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6" pages="3">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" pages="3">
   <diagram name="Camadas" id="tWRENjqlTaximkxbu8Pc">
     <mxGraphModel dx="2618" dy="966" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -122,53 +122,53 @@
     </mxGraphModel>
   </diagram>
   <diagram name="C4-Context" id="c2OqqSDdI2A3D6NiYZM3">
-    <mxGraphModel dx="1791" dy="966" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1669" dy="678" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title1" value="Serviço de exemplo - Diagrama de Contexto (C4)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="355" y="20" width="490" height="30" as="geometry" />
+        <mxCell id="title1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1" value="Serviço de exemplo - Diagrama de Contexto (C4)" vertex="1">
+          <mxGeometry height="30" width="490" x="355" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="person1_label" value="Person&#xa;&#xa;👤&#xa;&#xa;Usuário/Cliente&#xa;&#xa;Consome API para&#xa;consultar dados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#08427b;strokeColor=#073B6F;fontColor=white;fontSize=10;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
-          <mxGeometry x="200" y="170" width="140" height="120" as="geometry" />
+        <mxCell id="person1_label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#08427b;strokeColor=#073B6F;fontColor=white;fontSize=10;fontStyle=1;verticalAlign=top;" value="Person&#xa;&#xa;👤&#xa;&#xa;Usuário/Cliente&#xa;&#xa;Consome API para&#xa;consultar dados" vertex="1">
+          <mxGeometry height="120" width="140" x="200" y="170" as="geometry" />
         </mxCell>
-        <mxCell id="external1_label" value="External System&#xa;&#xa;🔄&#xa;&#xa;Sistema Externo&#xa;Scheduler&#xa;&#xa;Aciona jobs para&#xa;processamento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#8A8A8A;fontColor=white;fontSize=10;fontStyle=1;verticalAlign=middle;" parent="1" vertex="1">
-          <mxGeometry x="200" y="370" width="140" height="120" as="geometry" />
+        <mxCell id="external1_label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#8A8A8A;fontColor=white;fontSize=10;fontStyle=1;verticalAlign=middle;" value="Person&lt;br&gt;&lt;br&gt;👤&lt;br&gt;&lt;br&gt;Usuário/Cliente&lt;br&gt;&lt;br&gt;Consome API para&lt;br&gt;processamento" vertex="1">
+          <mxGeometry height="120" width="140" x="200" y="370" as="geometry" />
         </mxCell>
-        <mxCell id="viacep_label" value="External System&#xa;&#xa;🌍&#xa;&#xa;ViaCEP API&#xa;&#xa;API externa para&#xa;consulta de CEPs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#8A8A8A;fontColor=white;fontSize=10;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="530" y="630" width="140" height="120" as="geometry" />
+        <mxCell id="viacep_label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#8A8A8A;fontColor=white;fontSize=10;fontStyle=1" value="External System&#xa;&#xa;🌍&#xa;&#xa;ViaCEP API&#xa;&#xa;API externa para&#xa;consulta de CEPs" vertex="1">
+          <mxGeometry height="120" width="140" x="530" y="630" as="geometry" />
         </mxCell>
-        <mxCell id="system1_label" value="Software System&#xa;&#xa;🌐&#xa;&#xa;API System&#xa;&#xa;API REST .NET 9&#xa;para consulta de dados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=10;fontStyle=1;verticalAlign=middle;" parent="1" vertex="1">
-          <mxGeometry x="530" y="170" width="140" height="120" as="geometry" />
+        <mxCell id="system1_label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=10;fontStyle=1;verticalAlign=middle;" value="Software System&#xa;&#xa;🌐&#xa;&#xa;API System&#xa;&#xa;API REST .NET 9&#xa;para consulta de dados" vertex="1">
+          <mxGeometry height="120" width="140" x="530" y="170" as="geometry" />
         </mxCell>
-        <mxCell id="system2_label" value="Software System&#xa;&#xa;⚙️&#xa;&#xa;Worker System&#xa;&#xa;Worker Service com&#xa;Quartz.NET que consome&#xa;ViaCEP para sincronizar dados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=10;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="530" y="350" width="140" height="160" as="geometry" />
+        <mxCell id="system2_label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=10;fontStyle=1" value="Software System&lt;br&gt;&lt;br&gt;🌐&lt;br&gt;&lt;br&gt;API System&lt;br&gt;&lt;br&gt;API REST .NET 9&lt;br&gt;&amp;nbsp;que consome&lt;br&gt;ViaCEP para sincronizar dados" vertex="1">
+          <mxGeometry height="160" width="140" x="530" y="350" as="geometry" />
         </mxCell>
-        <mxCell id="database1_label" value="Database&#xa;&#xa;🗄️&#xa;&#xa;MySQL Database&#xa;&#xa;Banco de dados com&#xa;informações de CEPs&#xa;sincronizadas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#438dd5;strokeColor=#3C7FC0;fontColor=white;fontSize=10;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="810" y="300" width="140" height="140" as="geometry" />
+        <mxCell id="database1_label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#438dd5;strokeColor=#3C7FC0;fontColor=white;fontSize=10;fontStyle=1" value="Database&#xa;&#xa;🗄️&#xa;&#xa;MySQL Database&#xa;&#xa;Banco de dados com&#xa;informações de CEPs&#xa;sincronizadas" vertex="1">
+          <mxGeometry height="140" width="140" x="810" y="300" as="geometry" />
         </mxCell>
-        <mxCell id="rel1" value="uses&#xa;HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="person1_label" target="system1_label" edge="1">
-          <mxGeometry x="0.1" relative="1" as="geometry">
+        <mxCell id="rel1" edge="1" parent="1" source="person1_label" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="system1_label" value="uses&#xa;HTTPS">
+          <mxGeometry relative="1" x="0.1008" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rel2" value="triggers&#xa;jobs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="external1_label" target="system2_label" edge="1">
-          <mxGeometry x="0.1" relative="1" as="geometry">
+        <mxCell id="rel2" edge="1" parent="1" source="external1_label" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="system2_label" value="uses&lt;br&gt;HTTPS">
+          <mxGeometry relative="1" x="0.1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rel3" value="reads from&#xa;MySQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="system1_label" target="database1_label" edge="1">
-          <mxGeometry x="0.1" relative="1" as="geometry">
+        <mxCell id="rel3" edge="1" parent="1" source="system1_label" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="database1_label" value="reads from&#xa;MySQL">
+          <mxGeometry relative="1" x="0.1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rel4" value="writes to&#xa;MySQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="system2_label" target="database1_label" edge="1">
-          <mxGeometry x="0.1" relative="1" as="geometry">
+        <mxCell id="rel4" edge="1" parent="1" source="system2_label" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="database1_label" value="writes to&#xa;MySQL">
+          <mxGeometry relative="1" x="0.1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rel5" value="consumes&#xa;HTTPS/JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="system2_label" target="viacep_label" edge="1">
-          <mxGeometry x="0.1" relative="1" as="geometry">
+        <mxCell id="rel5" edge="1" parent="1" source="system2_label" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=12;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="viacep_label" value="consumes&#xa;HTTPS/JSON">
+          <mxGeometry relative="1" x="0.1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
@@ -176,70 +176,72 @@
     </mxGraphModel>
   </diagram>
   <diagram name="C4-Container" id="eqEi-u7bTYa1Nbn-_wKa">
-    <mxGraphModel dx="1235" dy="666" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1390" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title2" value="Serviço de exemplo&amp;nbsp;- Diagrama de Container (C4)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="475" y="20" width="450" height="30" as="geometry" />
+        <mxCell id="title2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1" value="Serviço de exemplo&amp;nbsp;- Diagrama de Container (C4)" vertex="1">
+          <mxGeometry height="30" width="450" x="475" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="person2_label" value="Person&#xa;&#xa;👤&#xa;&#xa;Usuário/Cliente" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#08427b;strokeColor=#073B6F;fontColor=white;fontSize=10;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="250" y="260" width="100" height="80" as="geometry" />
+        <mxCell id="person2_label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#08427b;strokeColor=#073B6F;fontColor=white;fontSize=10;fontStyle=1" value="Person&#xa;&#xa;👤&#xa;&#xa;Usuário/Cliente" vertex="1">
+          <mxGeometry height="80" width="100" x="250" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="external2_label" value="External System&#xa;&#xa;🔄&#xa;&#xa;Sistema Externo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#8A8A8A;fontColor=white;fontSize=11;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="250" y="450" width="100" height="80" as="geometry" />
+        <mxCell id="external2_label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#8A8A8A;fontColor=white;fontSize=11;fontStyle=1" value="External System&#xa;&#xa;🔄&#xa;&#xa;Sistema Externo" vertex="1">
+          <mxGeometry height="80" width="100" x="250" y="460" as="geometry" />
         </mxCell>
-        <mxCell id="viacep2_label" value="External System&#xa;&#xa;🌍&#xa;&#xa;ViaCEP API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#8A8A8A;fontColor=white;fontSize=11;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="755" y="680" width="100" height="80" as="geometry" />
+        <mxCell id="viacep2_label" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#8A8A8A;fontColor=white;fontSize=11;fontStyle=1" value="External System&#xa;&#xa;🌍&#xa;&#xa;ViaCEP API" vertex="1">
+          <mxGeometry height="80" width="100" x="755" y="680" as="geometry" />
         </mxCell>
-        <mxCell id="apiBoundary" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#1168bd;strokeWidth=3;dashed=1" parent="1" vertex="1">
-          <mxGeometry x="445" y="210" width="450" height="150" as="geometry" />
+        <mxCell id="apiBoundary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#1168bd;strokeWidth=3;dashed=1" value="" vertex="1">
+          <mxGeometry height="150" width="450" x="445" y="210" as="geometry" />
         </mxCell>
-        <mxCell id="apiTitle" value="API System" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#1168bd" parent="1" vertex="1">
-          <mxGeometry x="465" y="220" width="100" height="20" as="geometry" />
+        <mxCell id="apiTitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#1168bd" value="API System" vertex="1">
+          <mxGeometry height="20" width="100" x="465" y="220" as="geometry" />
         </mxCell>
-        <mxCell id="webapi" value="Container&#xa;&#xa;🌐&#xa;&#xa;Web API&#xa;&#xa;ASP.NET Core&#xa;Endpoints REST" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="465" y="250" width="80" height="80" as="geometry" />
+        <mxCell id="webapi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" value="Container&#xa;&#xa;🌐&#xa;&#xa;Web API&#xa;&#xa;ASP.NET Core&#xa;Endpoints REST" vertex="1">
+          <mxGeometry height="80" width="80" x="465" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="apiapp" value="Container&#xa;&#xa;🏗️&#xa;&#xa;Application Layer&#xa;&#xa;Casos de uso e&#xa;regras de negócio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="565" y="250" width="80" height="80" as="geometry" />
+        <mxCell id="apiapp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" value="Container&#xa;&#xa;🏗️&#xa;&#xa;Application Layer&#xa;&#xa;Casos de uso e&#xa;regras de negócio" vertex="1">
+          <mxGeometry height="80" width="80" x="565" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="apidomain" value="Container&#xa;&#xa;💎&#xa;&#xa;Domain Layer&#xa;&#xa;Entidades e&#xa;regras de domínio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="665" y="250" width="80" height="80" as="geometry" />
+        <mxCell id="apidomain" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" value="Container&#xa;&#xa;💎&#xa;&#xa;Domain Layer&#xa;&#xa;Entidades e&#xa;regras de domínio" vertex="1">
+          <mxGeometry height="80" width="80" x="665" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="apiinfra" value="Container&#xa;&#xa;🔧&#xa;&#xa;Infrastructure Layer&#xa;&#xa;Acesso a dados&#xa;via EF Core" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="765" y="250" width="80" height="80" as="geometry" />
+        <mxCell id="apiinfra" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" value="Container&#xa;&#xa;🔧&#xa;&#xa;Infrastructure Layer&#xa;&#xa;Acesso a dados&#xa;via EF Core" vertex="1">
+          <mxGeometry height="80" width="80" x="765" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="workerBoundary" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#1168bd;strokeWidth=3;dashed=1" parent="1" vertex="1">
-          <mxGeometry x="445" y="430" width="450" height="150" as="geometry" />
+        <mxCell id="workerBoundary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#1168bd;strokeWidth=3;dashed=1" value="" vertex="1">
+          <mxGeometry height="150" width="450" x="445" y="430" as="geometry" />
         </mxCell>
-        <mxCell id="workerTitle" value="Worker System" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#1168bd" parent="1" vertex="1">
-          <mxGeometry x="465" y="440" width="120" height="20" as="geometry" />
+        <mxCell id="workerTitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#1168bd" value="API System" vertex="1">
+          <mxGeometry height="20" width="120" x="465" y="440" as="geometry" />
         </mxCell>
-        <mxCell id="fz8z1EZlVuAPQG6NY_4K-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.998;entryY=0.619;entryDx=0;entryDy=0;entryPerimeter=0;flowAnimation=1;dashed=1;" edge="1" parent="1" source="workerservice" target="external2_label">
+        <mxCell id="fz8z1EZlVuAPQG6NY_4K-4" edge="1" parent="1" source="workerservice" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.998;entryY=0.619;entryDx=0;entryDy=0;entryPerimeter=0;flowAnimation=1;dashed=1;" target="external2_label" value="">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="405" y="510" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="workerservice" value="Container&#xa;&#xa;⚙️&#xa;&#xa;Worker Service&#xa;&#xa;Quartz.NET&#xa;Processamento de jobs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=7;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="465" y="470" width="80" height="80" as="geometry" />
+        <mxCell id="workerservice" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=7;fontStyle=1" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Container&lt;/span&gt;&lt;br style=&quot;font-size: 8px;&quot;&gt;&lt;br style=&quot;font-size: 8px;&quot;&gt;&lt;span style=&quot;font-size: 8px;&quot;&gt;🌐&lt;/span&gt;&lt;br style=&quot;font-size: 8px;&quot;&gt;&lt;br style=&quot;font-size: 8px;&quot;&gt;&lt;span style=&quot;font-size: 8px;&quot;&gt;Web API&lt;/span&gt;&lt;br style=&quot;font-size: 8px;&quot;&gt;&lt;br style=&quot;font-size: 8px;&quot;&gt;&lt;span style=&quot;font-size: 8px;&quot;&gt;ASP.NET Core&lt;/span&gt;&lt;br style=&quot;font-size: 8px;&quot;&gt;&lt;span style=&quot;font-size: 8px;&quot;&gt;Endpoints REST&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="465" y="470" as="geometry" />
         </mxCell>
-        <mxCell id="workerapp" value="Container&#xa;&#xa;🏗️&#xa;&#xa;Application Layer&#xa;&#xa;Casos de uso de&#xa;processamento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="565" y="470" width="80" height="80" as="geometry" />
+        <mxCell id="workerapp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=8;fontStyle=1" value="Container&#xa;&#xa;🏗️&#xa;&#xa;Application Layer&#xa;&#xa;Casos de uso de&#xa;processamento" vertex="1">
+          <mxGeometry height="80" width="80" x="565" y="470" as="geometry" />
         </mxCell>
-        <mxCell id="workerdomain" value="Container&#xa;&#xa;💎&#xa;&#xa;Domain Layer&#xa;&#xa;Entidades e&#xa;regras de domínio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=7;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="665" y="470" width="80" height="80" as="geometry" />
+        <mxCell id="workerdomain" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=7;fontStyle=1" value="Container&#xa;&#xa;💎&#xa;&#xa;Domain Layer&#xa;&#xa;Entidades e&#xa;regras de domínio" vertex="1">
+          <mxGeometry height="80" width="80" x="665" y="470" as="geometry" />
         </mxCell>
-        <mxCell id="workerinfra" value="Container&#xa;&#xa;🔧&#xa;&#xa;Infrastructure Layer&#xa;&#xa;Persistência via EF Core&#xa;e HttpClient para ViaCEP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=6;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="765" y="470" width="80" height="80" as="geometry" />
+        <mxCell id="workerinfra" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1168bd;strokeColor=#0b4884;fontColor=white;fontSize=6;fontStyle=1" value="Container&#xa;&#xa;🔧&#xa;&#xa;Infrastructure Layer&#xa;&#xa;Persistência via EF Core&#xa;e HttpClient para ViaCEP" vertex="1">
+          <mxGeometry height="80" width="80" x="765" y="470" as="geometry" />
         </mxCell>
-        <mxCell id="database2" value="Database&lt;br&gt;&lt;br&gt;🗄️&lt;br&gt;&lt;br&gt;MySQL Database&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#438dd5;strokeColor=#3C7FC0;fontColor=white;fontSize=8;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="995" y="330" width="120" height="100" as="geometry" />
+        <mxCell id="database2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#438dd5;strokeColor=#3C7FC0;fontColor=white;fontSize=8;fontStyle=1" value="Database&lt;br&gt;&lt;br&gt;🗄️&lt;br&gt;&lt;br&gt;MySQL Database&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="120" x="995" y="330" as="geometry" />
         </mxCell>
-        <mxCell id="rel5" value="makes API calls&#xa;HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="person2_label" target="webapi" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="rel5" edge="1" parent="1" source="person2_label" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="webapi" value="makes API calls&#xa;HTTPS">
+          <mxGeometry relative="1" x="-0.1304" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="rel6" value="triggers&#xa;scheduled jobs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="external2_label" target="workerservice" edge="1">
+        <mxCell id="rel6" edge="1" parent="1" source="external2_label" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="workerservice" value="makes API calls&lt;br&gt;HTTPS">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="440" y="500" />
@@ -247,33 +249,39 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="rel7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" parent="1" source="webapi" target="apiapp" edge="1">
+        <mxCell id="rel7" edge="1" parent="1" source="webapi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" target="apiapp" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rel8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" parent="1" source="apiapp" target="apidomain" edge="1">
+        <mxCell id="rel8" edge="1" parent="1" source="apiapp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" target="apidomain" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rel9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" parent="1" source="apiapp" target="apiinfra" edge="1">
+        <mxCell id="rel9" edge="1" parent="1" source="apiapp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" target="apiinfra" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rel10" value="reads data&#xa;Entity Framework" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="apiinfra" target="database2" edge="1">
+        <mxCell id="rel10" edge="1" parent="1" source="apiinfra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="database2" value="reads data&#xa;Entity Framework">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rel11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" parent="1" source="workerservice" target="workerapp" edge="1">
+        <mxCell id="rel11" edge="1" parent="1" source="workerservice" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" target="workerapp" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rel12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" parent="1" source="workerapp" target="workerdomain" edge="1">
+        <mxCell id="rel12" edge="1" parent="1" source="workerapp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" target="workerdomain" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rel13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" parent="1" source="workerapp" target="workerinfra" edge="1">
+        <mxCell id="rel13" edge="1" parent="1" source="workerapp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;startArrow=none;endArrow=block;endFill=1" target="workerinfra" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rel14" value="writes data&#xa;Entity Framework" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="workerinfra" target="database2" edge="1">
+        <mxCell id="rel14" edge="1" parent="1" source="workerinfra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="database2" value="writes data&#xa;Entity Framework">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rel15" value="consumes&#xa;HTTPS/JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" parent="1" source="workerinfra" target="viacep2_label" edge="1">
-          <mxGeometry x="0.1111" y="-5" relative="1" as="geometry">
+        <mxCell id="rel15" edge="1" parent="1" source="workerinfra" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontSize=10;fontColor=#333333;startArrow=none;endArrow=block;endFill=1;flowAnimation=1;" target="viacep2_label" value="consumes&#xa;HTTPS/JSON">
+          <mxGeometry relative="1" x="0.1111" y="-5" as="geometry">
             <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gyl6tcVJtQLhvsaoTRGl-1" edge="1" parent="1" source="webapi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.625;entryDx=0;entryDy=0;entryPerimeter=0;flowAnimation=1;dashed=1;exitX=-0.027;exitY=0.61;exitDx=0;exitDy=0;exitPerimeter=0;" target="person2_label" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="380" as="sourcePoint" />
+            <mxPoint x="470" y="290" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
