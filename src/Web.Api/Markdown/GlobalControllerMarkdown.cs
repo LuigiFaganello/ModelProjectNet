@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Web.Api.Markdown.V1
+namespace Web.Api.Markdown
 {
     [ExcludeFromCodeCoverage]
     public class GlobalControllerMarkdown

@@ -3,6 +3,7 @@ using Application.Services;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Web.Api.Markdown;
 using Web.Api.Markdown.V1;
 
 namespace Web.Api.Controllers.V1
@@ -49,16 +50,17 @@ namespace Web.Api.Controllers.V1
             return HandleResult(await _exampleAppService.GetByZipCode(zipCode, cancellationToken));
         }
 
-        [HttpPost()]
+        [HttpPost("sync")]
         [MapToApiVersion("1.0")]
-        [SwaggerOperation(Summary = ExampleControllerMarkdown.Post.Summary, Description = ExampleControllerMarkdown.Post.Description)]
-        [SwaggerResponse(200, GlobalControllerMarkdown.Description.StatusCode201)]
+        [SwaggerOperation(Summary = ExampleControllerMarkdown.Sync.Summary, Description = ExampleControllerMarkdown.Sync.Description)]
+        [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
         [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
-        public async Task<IActionResult> Post([FromBody] ExampleAppServiceDto ExampleAppServiceDto, CancellationToken cancellationToken)
+        public async Task<IActionResult> Sync(CancellationToken cancellationToken)
         {
-            return Created();
+            await _exampleAppService.SyncCity(cancellationToken);
+            return NoContent();
         }
     }
 }

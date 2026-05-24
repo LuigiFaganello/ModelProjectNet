@@ -3,7 +3,8 @@ using Application.Services;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using Web.Api.Markdown.V1;
+using Web.Api.Markdown;
+using Web.Api.Markdown.V2;
 
 
 namespace Web.Api.Controllers.V2
@@ -48,6 +49,19 @@ namespace Web.Api.Controllers.V2
         public async Task<IActionResult> GetById(string zipCode, CancellationToken cancellationToken)
         {
             return HandleResult(await _exampleAppService.GetByZipCode(zipCode, cancellationToken));
+        }
+
+        [HttpPost("sync")]
+        [MapToApiVersion("2.0")]
+        [SwaggerOperation(Summary = ExampleControllerMarkdown.Sync.Summary, Description = ExampleControllerMarkdown.Sync.Description)]
+        [SwaggerResponse(204, GlobalControllerMarkdown.Description.StatusCode204)]
+        [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
+        [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
+        [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
+        public async Task<IActionResult> Sync(CancellationToken cancellationToken)
+        {
+            await _exampleAppService.SyncCity(cancellationToken);
+            return NoContent();
         }
     }
 }
