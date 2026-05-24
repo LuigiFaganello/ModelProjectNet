@@ -12,7 +12,6 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1.0")]
     [Produces("application/json")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    //[Authorize]
     [SwaggerTag("Controller de exemplo - V1")]
     public class ExampleController : BaseController
     {
