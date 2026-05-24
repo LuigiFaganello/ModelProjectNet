@@ -22,8 +22,8 @@ dotnet test --filter "FullyQualifiedName~ExampleRepositoryTests.AddAsync_ShouldA
 dotnet ef migrations add <Name> --project src/Infrastructure --startup-project src/Web.Api
 dotnet ef database update --project src/Infrastructure --startup-project src/Web.Api
 
-# Local environment (API + MySQL + Seq)
-docker compose up --build           # API on :8080, Seq UI on :8081, MySQL on :3306
+# Local environment (API + MySQL)
+docker compose up --build           # API on :8080, MySQL on :3306
 ```
 
 Targets **.NET 10** (`net10.0`). The README still mentions ".NET Core 9" and a WorkerService — both are stale; the WorkerService project was removed.
@@ -86,12 +86,12 @@ Interfaces in `Domain/Interfaces` (`IRepositoryBase`, `IExampleRepository`), imp
 
 - **ViaCEP** — Brazilian postal-code/address API. `Infrastructure/ExternalService/ExampleService.cs` uses an injected `HttpClient` (registered via `AddHttpClient()`) whose `BaseAddress`/`Timeout` come from `AppSettings.Viacep`. HTTP calls go through `HttpClientExtensions.SendRequestAsync<TReq,TResp>`. The service swallows errors and returns an empty collection rather than throwing.
 - **MySQL** — Pomelo provider with `ServerVersion.AutoDetect(connectionString)`; `DataContextFactory` (`IDesignTimeDbContextFactory`) enables design-time migrations by reading `../Web.Api/appsettings.json`.
-- **Seq** — Serilog sink for structured logs, configured from `appsettings.json` (`builder.Host.UseSerilog(... ReadFrom.Configuration ...)`); both Console and Seq sinks are active, with `serverUrl` defaulting to `http://localhost:5341` (override per environment).
+- **Serilog** — structured logging configured from `appsettings.json` (`builder.Host.UseSerilog(... ReadFrom.Configuration ...)`); the Console sink is the only configured sink.
 - **Health checks** — MySQL health check tagged `ready`, registered in `AddInfrastructure`.
 
 ### Observability
 
-`CorrelationMiddleware` (first in the pipeline) reads an incoming `X-Correlation-Id` header or generates a GUID, stores it in `HttpContext.Items["CorrelationId"]`, echoes it back on the response header, and pushes it into Serilog's `LogContext` — so **every log line during the request carries `CorrelationId`** (the Console template and Seq both surface it). `GlobalExceptionMiddleware` includes the same `correlationId` in error response bodies. When adding logging, rely on the ambient `LogContext` property rather than threading the id manually.
+`CorrelationMiddleware` (first in the pipeline) reads an incoming `X-Correlation-Id` header or generates a GUID, stores it in `HttpContext.Items["CorrelationId"]`, echoes it back on the response header, and pushes it into Serilog's `LogContext` — so **every log line during the request carries `CorrelationId`** (the Console output template surfaces it). `GlobalExceptionMiddleware` includes the same `correlationId` in error response bodies. When adding logging, rely on the ambient `LogContext` property rather than threading the id manually.
 
 ### Configuration
 

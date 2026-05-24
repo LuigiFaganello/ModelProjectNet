@@ -180,8 +180,8 @@ Esta seção lista as principais tecnologias e pacotes NuGet usados em cada proj
 
 *   **`Microsoft.AspNetCore.OpenApi`**: Ferramentas para gerar especificações OpenAPI.
 *   **`Serilog.AspNetCore`**: Integração do Serilog com ASP.NET Core.
-*   **`Serilog.Sinks.Seq`**: Sink do Serilog para Seq (servidor de log estruturado).
 *   **`Serilog`**: Biblioteca de logging Serilog principal.
+*   **`Serilog.Sinks.Console`**: Sink do Serilog para saída em console.
 *   **`Swashbuckle.AspNetCore`**: Gera documentação Swagger/OpenAPI para APIs ASP.NET Core.
 *   **`Swashbuckle.AspNetCore.Annotations`**: Fornece atributos para aprimorar a documentação Swagger.
 *   **`Asp.Versioning.Mvc`**: Versionamento de API para ASP.NET Core MVC.

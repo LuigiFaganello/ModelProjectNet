@@ -13,7 +13,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
 	<PackageReference Include="Serilog.AspNetCore" />
 	<PackageReference Include="Serilog.Sinks.Console" />
-	<PackageReference Include="Serilog.Sinks.Seq" />
 	<PackageReference Include="Serilog" />
 	<PackageReference Include="Swashbuckle.AspNetCore" />
 	<PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
