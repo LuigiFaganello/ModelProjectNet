@@ -37,7 +37,6 @@ This command leverages specialized agents for comprehensive test suite managemen
 - **general-qa** - Primary agent for comprehensive testing strategies and automation
 - **general-code-quality-debugger** - For debugging failing tests and improving test quality
 - **general-backend-developer** - For API testing and integration test implementation
-- **general-frontend-developer** - For UI testing with browser automation tools
 
 Each agent contributes specialized expertise to ensure thorough project analysis and high-quality documentation generation.
 

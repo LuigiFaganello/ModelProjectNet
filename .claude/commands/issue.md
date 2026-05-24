@@ -27,9 +27,7 @@ To analyze and fix the GitHub issue, just type:
 
 This command leverages specialized agents based on issue type and complexity:
 
-- **general-fullstack-developer** - For end-to-end feature implementation spanning multiple layers
 - **general-backend-developer** - For API-focused issues and backend development
-- **general-frontend-developer** - For UI/UX issues and frontend implementation
 - **general-qa** - For comprehensive testing strategies and validation
 - **general-purpose** - For complex issue analysis and multi-step research
 
