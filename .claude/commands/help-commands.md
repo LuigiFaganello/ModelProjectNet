@@ -16,24 +16,12 @@ To get help with available commands, just type:
 
 ## Available Commands
 
-- `/custom-init` - CLAUDE.md Generator.
 - `/commit` - Conventional Commits.
 - `/issue` - GitHub Issue Workflow.
 - `/reviewpr` - Pull Request Review.
 - `/test` - Test Suite Management.
 
 ## How It Works
-
-### `/custom-init` - CLAUDE.md Generator
-
-- **Purpose**: Automatically generates comprehensive CLAUDE.md files for any project.
-- **Usage**: `/custom-init`
-- **What it does**: 
-  - Analyzes project structure and detects technology stack.
-  - Generates documentation sections (Overview, Architecture, Features).
-  - Creates development workflow guides.
-  - Produces comprehensive project context for AI assistants.
-- **Best for**: New projects, onboarding, or updating existing documentation.
 
 ### `/commit` - Conventional Commits
 
@@ -86,9 +74,6 @@ To get help with available commands, just type:
 ```bash
 # Create a conventional commit
 /commit
-
-# Generate CLAUDE.md for any project
-/custom-init
 
 # Work on a GitHub issue
 /issue 123
@@ -145,7 +130,6 @@ The following specialized agents are leveraged across all commands to provide ex
 - **general-technical-project-lead** - Security assessments, strategic decisions, and architectural review
 
 ### Agent Usage by Command
-- **`/custom-init`**: general-solution-architect, general-backend-developer, general-devops, general-qa, general-code-quality-debugger, general-technical-writer (general-purpose as fallback)
 - **`/commit`**: general-code-quality-debugger, general-technical-project-lead
 - **`/issue`**: general-backend-developer, general-qa, general-purpose
 - **`/reviewpr`**: general-code-quality-debugger, general-technical-project-lead, general-qa, general-solution-architect
