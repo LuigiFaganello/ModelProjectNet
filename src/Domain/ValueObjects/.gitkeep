@@ -1,0 +1,2 @@
+# Domain/ValueObjects — tipos imutáveis sem identidade própria (ex.: ZipCode, Email,
+# Money), validados na construção. Sem dependências externas. Veja CLAUDE.md.

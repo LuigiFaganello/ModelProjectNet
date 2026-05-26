@@ -1,0 +1,2 @@
+# Application/Mappings — perfis/extensões de mapeamento entre Entidades e DTOs.
+# Hoje o mapeamento é manual nos AppServices; AutoMapper/Mapster podem morar aqui. Veja CLAUDE.md.

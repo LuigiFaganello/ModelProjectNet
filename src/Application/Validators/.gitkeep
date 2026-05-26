@@ -1,0 +1,2 @@
+# Application/Validators — validação de entrada (DTOs/comandos) dos casos de uso.
+# Convenção: FluentValidation ou guard clauses; não traz dependência por padrão. Veja CLAUDE.md.
