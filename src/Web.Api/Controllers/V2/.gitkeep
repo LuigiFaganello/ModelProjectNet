@@ -1,0 +1,2 @@
+# Web.Api/Controllers/V2 — controllers da versão 2 da API ([ApiVersion("2.0")]).
+# Espelha o padrão de V1. Veja CLAUDE.md (API versioning & controllers).
