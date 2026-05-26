@@ -72,8 +72,7 @@ This repo carries custom Claude Code tooling (adapted from the "Claude Code Best
 
 *Development:*
 
-- **general-backend-developer** — design, implement and optimize backend APIs (REST/GraphQL), database schema design, performance tuning, error-handling strategies and monitoring.
-- **general-devops** — infrastructure automation, CI/CD pipeline design, container orchestration, deployment strategies, monitoring/observability, scaling and reliability engineering.
+- **general-backend-developer** — design, implement and optimize backend APIs (REST), database schema design, performance tuning, error-handling strategies and monitoring.
 
 *Quality Assurance:*
 
@@ -88,7 +87,7 @@ This repo carries custom Claude Code tooling (adapted from the "Claude Code Best
 - `/reviewpr` → general-code-quality-debugger, general-technical-project-lead, general-qa, general-solution-architect.
 - `/test` → general-qa, general-code-quality-debugger, general-backend-developer.
 
-`general-devops`, `general-pm` and `general-technical-writer` aren't wired into a command — invoke them directly via the Agent tool when their expertise is needed.
+`general-pm` and `general-technical-writer` aren't wired into a command — invoke them directly via the Agent tool when their expertise is needed.
 
 **Skills** (`.claude/skills/`): `conventional-commits` (auto-enforces the commit format) and `drawio` (diagram generation).
 

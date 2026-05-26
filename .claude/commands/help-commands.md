@@ -116,20 +116,23 @@ The following specialized agents are leveraged across all commands to provide ex
 > Commands also use Claude Code's built-in **general-purpose** agent for complex multi-step analysis and file searching. It ships with Claude Code and is not defined in this repository.
 
 ### Core Agents
+
 - **general-solution-architect** - Architecture analysis, technology stack decisions, and design patterns
 - **general-technical-writer** - Documentation creation, formatting, and content organization
 - **general-pm** - Issue creation, prioritization, progress tracking, and lifecycle management
 
 ### Development Agents
+
 - **general-backend-developer** - API development, database patterns, and server-side logic
-- **general-devops** - Infrastructure automation, CI/CD, container orchestration, and reliability engineering
 
 ### Quality Assurance Agents
+
 - **general-qa** - Testing strategies, automation, and comprehensive validation
 - **general-code-quality-debugger** - Code review, debugging, and quality assessment
 - **general-technical-project-lead** - Security assessments, strategic decisions, and architectural review
 
 ### Agent Usage by Command
+
 - **`/commit`**: general-code-quality-debugger, general-technical-project-lead
 - **`/issue`**: general-backend-developer, general-qa, general-purpose
 - **`/reviewpr`**: general-code-quality-debugger, general-technical-project-lead, general-qa, general-solution-architect
