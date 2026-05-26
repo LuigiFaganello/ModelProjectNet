@@ -48,6 +48,52 @@ This repo enforces a custom commit format (see `.claude/skills/conventional-comm
 - Present-tense imperative; single-line messages end with `.`. Keep commits atomic (one concern each).
 - **Never add trailers** — no "Generated with Claude Code", author, or `Co-Authored-By` lines. This overrides the usual default of appending a co-author trailer.
 
+## Claude Code tooling (`.claude/`)
+
+This repo carries custom Claude Code tooling (adapted from the "Claude Code Best Practices" setup, trimmed to a backend focus).
+
+**Custom slash commands** (`.claude/commands/`):
+
+- `/commit` — guided conventional commit following `.gitmessage` (see *Commit conventions* above).
+- `/issue <number>` — resolve a GitHub issue end-to-end via GitHub Flow.
+- `/reviewpr <number>` — thorough PR review with structured feedback.
+- `/test <scope>` — run and improve the test suite for a given scope.
+- `/help-commands` — list all custom commands and their usage.
+
+**Prerequisite:** `/issue` and `/reviewpr` require the GitHub CLI authenticated — `gh auth login` (verify with `gh repo view`).
+
+**Specialized agents** (`.claude/agents/`) provide domain expertise; the slash commands orchestrate them, and you can also invoke any agent directly via the Agent tool. Grouped by role (this is a backend-focused subset — no frontend/fullstack agents):
+
+*Core:*
+
+- **general-solution-architect** — system architecture, technology-stack decisions, scalability and distributed-systems/microservices design, performance strategy. Read-only analysis (Read/Grep/Glob), no edits.
+- **general-technical-writer** — create, review and improve technical docs: API documentation, READMEs, user/installation guides, troubleshooting.
+- **general-pm** — product-management oversight: issue creation, prioritization and metadata, sprint/progress tracking, blocker identification, status updates and lifecycle management.
+
+*Development:*
+
+- **general-backend-developer** — design, implement and optimize backend APIs (REST/GraphQL), database schema design, performance tuning, error-handling strategies and monitoring.
+- **general-devops** — infrastructure automation, CI/CD pipeline design, container orchestration, deployment strategies, monitoring/observability, scaling and reliability engineering.
+
+*Quality Assurance:*
+
+- **general-qa** — test planning and automation, edge-case identification, regression testing, and end-to-end validation strategies.
+- **general-code-quality-debugger** — systematic code review, debugging, refactoring guidance, root-cause analysis and technical-debt reduction.
+- **general-technical-project-lead** — principal-level technical leadership: performance optimization, security assessments and strategic/architectural review.
+
+**Which command uses which agent** (from the command files):
+
+- `/commit` → general-code-quality-debugger, general-technical-project-lead.
+- `/issue` → general-backend-developer, general-qa (plus the built-in general-purpose agent).
+- `/reviewpr` → general-code-quality-debugger, general-technical-project-lead, general-qa, general-solution-architect.
+- `/test` → general-qa, general-code-quality-debugger, general-backend-developer.
+
+`general-devops`, `general-pm` and `general-technical-writer` aren't wired into a command — invoke them directly via the Agent tool when their expertise is needed.
+
+**Skills** (`.claude/skills/`): `conventional-commits` (auto-enforces the commit format) and `drawio` (diagram generation).
+
+**Workflow templates** referenced by the commands: `.gitmessage` (commit format), `.github/COMMIT_CONVENTION.md` (commit best practices), `.github/pull_request_template.md` (PR structure).
+
 ## Architecture
 
 Clean Architecture, four layers. Dependency rule: outer depends on inner; inner never references outer.
