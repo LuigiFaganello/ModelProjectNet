@@ -1,5 +1,5 @@
 ﻿using Application.DTO;
-using Application.Services;
+using Application.Interfaces;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -56,9 +56,13 @@ namespace Web.Api.Controllers.V1
         [SwaggerResponse(400, GlobalControllerMarkdown.Description.StatusCode400)]
         [SwaggerResponse(401, GlobalControllerMarkdown.Description.StatusCode401)]
         [SwaggerResponse(500, GlobalControllerMarkdown.Description.StatusCode500)]
-        public async Task<IActionResult> Sync(CancellationToken cancellationToken)
+        public async Task<IActionResult> Sync(
+            [FromQuery] string state = "SP",
+            [FromQuery] string city = "Sao Paulo",
+            [FromQuery] string street = "Paulista",
+            CancellationToken cancellationToken = default)
         {
-            await _exampleAppService.SyncCity(cancellationToken);
+            await _exampleAppService.SyncCity(state, city, street, cancellationToken);
             return NoContent();
         }
     }

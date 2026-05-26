@@ -1,12 +1,11 @@
 
 using Application.DTO;
+using Application.Interfaces;
 using Application.Services;
 using Domain.Common;
 using Domain.Entities;
 using Domain.Interfaces;
 using FluentAssertions;
-using Infrastructure.ExternalService.DTO;
-using Infrastructure.ExternalService.Interface;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -84,22 +83,42 @@ namespace UnitTests.Application
         }
 
         [Fact]
-        public async Task SyncCity_ShouldCallAddAndSaveChanges_ForEachCity()
+        public async Task SyncCity_ShouldAddRangeAndSaveChangesOnce()
         {
             // Arrange
-            var cities = new List<ExampleServiceDTO>
+            var addresses = new List<AddressDto>
             {
-                new ExampleServiceDTO { Cep = "12345-678" },
-                new ExampleServiceDTO { Cep = "87654-321" }
+                new AddressDto { ZipCode = "12345-678", City = "Sao Paulo", State = "SP" },
+                new AddressDto { ZipCode = "87654-321", City = "Sao Paulo", State = "SP" }
             };
-            _exampleServiceMock.Setup(x => x.GetCityByCountry(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(cities);
+            _exampleServiceMock
+                .Setup(x => x.GetAddressesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(addresses);
 
             // Act
-            await _exampleAppService.SyncCity(CancellationToken.None);
+            await _exampleAppService.SyncCity("SP", "Sao Paulo", "Paulista", CancellationToken.None);
 
             // Assert
-            _exampleRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Example>(), It.IsAny<CancellationToken>()), Times.Exactly(2));
-            _exampleRepositoryMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
+            _exampleRepositoryMock.Verify(
+                x => x.AddRangeAsync(It.Is<IEnumerable<Example>>(e => e.Count() == 2), It.IsAny<CancellationToken>()),
+                Times.Once);
+            _exampleRepositoryMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task SyncCity_ShouldNotPersist_WhenNoAddressesReturned()
+        {
+            // Arrange
+            _exampleServiceMock
+                .Setup(x => x.GetAddressesAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(Enumerable.Empty<AddressDto>());
+
+            // Act
+            await _exampleAppService.SyncCity("SP", "Sao Paulo", "Paulista", CancellationToken.None);
+
+            // Assert
+            _exampleRepositoryMock.Verify(x => x.AddRangeAsync(It.IsAny<IEnumerable<Example>>(), It.IsAny<CancellationToken>()), Times.Never);
+            _exampleRepositoryMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
         }
     }
 }

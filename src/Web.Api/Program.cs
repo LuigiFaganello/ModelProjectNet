@@ -17,7 +17,7 @@ builder.Configuration
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 
-builder.Services.AddCorsConfiguration();
+builder.Services.AddCorsConfiguration(builder.Configuration);
 builder.Services.AddSwaggerConfiguration(builder.Configuration);
 builder.Services.AddHealthcheckConfiguration();
 builder.Services.AddControllers();
@@ -31,14 +31,17 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Settin
 
 var app = builder.Build();
 
+// Ordem do pipeline (importa): correlação e tratamento de exceção primeiro para
+// abranger todo o restante; depois infra de requisição; CORS antes de autorização;
+// endpoints por último.
 app.UseMiddleware<CorrelationMiddleware>();
 app.UseMiddleware<GlobalExceptionMiddleware>();
-app.MapControllers();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseCorsSetup();
 app.UseAuthorization();
 app.UseSwaggerSetup();
-app.UseHttpsRedirection();
 app.UseHealthcheckSetup();
-app.UseStaticFiles();
+app.MapControllers();
 app.MapOpenApi();
 app.Run();

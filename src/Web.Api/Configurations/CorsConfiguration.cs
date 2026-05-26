@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Web.Api.Configurations
 {
@@ -6,20 +6,38 @@ namespace Web.Api.Configurations
     [ExcludeFromCodeCoverage]
     public static class CorsConfiguration
     {
-        public static void AddCorsConfiguration(this IServiceCollection services)
+        private const string PolicyName = "DefaultCorsPolicy";
+
+        public static void AddCorsConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             ArgumentNullException.ThrowIfNull(services);
+            ArgumentNullException.ThrowIfNull(configuration);
+
+            // Origens permitidas via configuração (Cors:AllowedOrigins). Se vazio, cai no
+            // modo permissivo — adequado apenas para desenvolvimento. Restrinja por ambiente.
+            var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
+                ?? Array.Empty<string>();
 
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAllOrigins",
-                    builder =>
+                options.AddPolicy(PolicyName, builder =>
+                {
+                    if (allowedOrigins.Length > 0)
+                    {
+                        builder
+                            .WithOrigins(allowedOrigins)
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials();
+                    }
+                    else
                     {
                         builder
                             .AllowAnyOrigin()
                             .AllowAnyMethod()
                             .AllowAnyHeader();
-                    });
+                    }
+                });
             });
         }
 
@@ -27,7 +45,7 @@ namespace Web.Api.Configurations
         {
             ArgumentNullException.ThrowIfNull(app);
 
-            app.UseCors("AllowAllOrigins");
+            app.UseCors(PolicyName);
         }
     }
 }

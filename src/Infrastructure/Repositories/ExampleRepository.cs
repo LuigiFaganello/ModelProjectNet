@@ -14,7 +14,6 @@ namespace Infrastructure.Repositories
         {
             return await _dbSet
                 .Where(x => x.ZipCode == zipCode)
-                .OrderByDescending(x => x.ZipCode)
                 .FirstOrDefaultAsync(cancellationToken);
         }
     }

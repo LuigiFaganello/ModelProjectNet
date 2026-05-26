@@ -1,8 +1,8 @@
-﻿using Application.DTO;
+using Application.DTO;
+using Application.Interfaces;
 using Domain.Common;
 using Domain.Entities;
 using Domain.Interfaces;
-using Infrastructure.ExternalService.Interface;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Services
@@ -13,7 +13,7 @@ namespace Application.Services
         private readonly IExampleRepository _exampleRepository;
         private readonly IExampleService _exampleService;
 
-        public ExampleAppService(ILogger<ExampleAppService> logger, 
+        public ExampleAppService(ILogger<ExampleAppService> logger,
                                  IExampleRepository exampleRepository,
                                  IExampleService exampleService)
         {
@@ -21,6 +21,7 @@ namespace Application.Services
             _exampleRepository = exampleRepository;
             _exampleService = exampleService;
         }
+
         public async Task<Result<IEnumerable<ExampleAppServiceDto>>> GetAll(CancellationToken cancellationToken)
         {
             try
@@ -48,6 +49,7 @@ namespace Application.Services
                 return Result<IEnumerable<ExampleAppServiceDto>>.Failure(Error.Internal("Erro ao obter todos os exemplos"));
             }
         }
+
         public async Task<Result<ExampleAppServiceDto>> GetByZipCode(string zipCode, CancellationToken cancellationToken)
         {
             try
@@ -77,30 +79,34 @@ namespace Application.Services
                 return Result<ExampleAppServiceDto>.Failure(Error.Internal("Erro ao obter exemplo por CEP"));
             }
         }
-        public async Task SyncCity(CancellationToken cancellationToken)
+
+        public async Task SyncCity(string state, string city, string street, CancellationToken cancellationToken)
         {
             try
             {
-                var listexampleResult = await _exampleService.GetCityByCountry("SP", "Sao%20Paulo");
+                var addresses = await _exampleService.GetAddressesAsync(state, city, street, cancellationToken);
 
-                foreach (var exampleResult in listexampleResult)
-                {
-                    await _exampleRepository.AddAsync(new Example(exampleResult.Cep,
-                                                                  exampleResult.Logradouro,
-                                                                  exampleResult.Complemento,
-                                                                  exampleResult.Unidade,
-                                                                  exampleResult.Bairro,
-                                                                  exampleResult.Estado,
-                                                                  exampleResult.Uf), cancellationToken);
+                var examples = addresses
+                    .Select(a => new Example(a.ZipCode,
+                                             a.Street,
+                                             a.Complement,
+                                             a.Unit,
+                                             a.Neighborhood,
+                                             a.City,
+                                             a.State))
+                    .ToList();
 
+                if (examples.Count == 0)
+                    return;
 
-                    await _exampleRepository.SaveChangesAsync(cancellationToken);
-                }
+                // Persiste em lote, num único round-trip/SaveChanges (evita N+1).
+                await _exampleRepository.AddRangeAsync(examples, cancellationToken);
+                await _exampleRepository.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao realizar o sync da tabela de exemplo por CEP: {Message}", ex.Message);
-                throw new Exception(ex.Message);
+                throw;
             }
         }
     }

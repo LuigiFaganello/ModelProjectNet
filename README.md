@@ -172,8 +172,8 @@ Esta seção lista as principais tecnologias e pacotes NuGet usados em cada proj
 *   **`Microsoft.Extensions.Configuration`**: Abstrações de configuração.
 *   **`Microsoft.Extensions.Configuration.FileExtensions`**: Provedor de configuração baseado em arquivo.
 *   **`Microsoft.Extensions.Configuration.Json`**: Provedor de configuração JSON.
-*   **`Microsoft.Extensions.Http`**: Integra `HttpClient` com injeção de dependência.
-*   **`Newtonsoft.Json`**: Biblioteca popular de serialização/desserialização JSON.
+*   **`Microsoft.Extensions.Http`**: Integra `HttpClient` com injeção de dependência (typed clients).
+*   **`System.Text.Json`** (nativo do runtime): serialização/desserialização JSON das integrações externas.
 *   **`Pomelo.EntityFrameworkCore.MySql`**: Provedor MySQL para Entity Framework Core.
 
 ### Camada Web.Api

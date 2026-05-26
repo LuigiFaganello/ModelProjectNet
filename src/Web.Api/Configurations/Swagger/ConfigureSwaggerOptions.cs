@@ -43,7 +43,7 @@ namespace Web.Api.Configurations.Swagger
                                 "para integração com modulo: XPTO.<br/>" +
                                 "<br/>" +
                                 "<strong>Tecnologias / Ferramentas utilizadas</strong><br/><br/>" +
-                                "- .Net Core 10<br/> " +
+                                "- .NET 10<br/> " +
                                 "- Mysql<br/> " +
                                 "<br/>" +
                                 "Qualquer dúvida ou problema favor entrar em contato.<br/>",

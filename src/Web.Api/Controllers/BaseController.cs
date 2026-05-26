@@ -32,24 +32,6 @@ namespace Web.Api.Controllers
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
-        protected IActionResult HandleNoContentOrNotFound(Result result)
-        {
-            if (result.IsSuccess)
-                return NoContent();
-
-            return HandleError(result.Error!);
-        }
-
-        [ApiExplorerSettings(IgnoreApi = true)]
-        protected IActionResult HandleNoContentOrNotFound<T>(Result<T> result)
-        {
-            if (result.IsSuccess)
-                return NoContent();
-
-            return HandleError(result.Error!);
-        }
-
-        [ApiExplorerSettings(IgnoreApi = true)]
         protected IActionResult HandleError(Error error)
         {
             var errorResponse = CreateStandardErrorResponse(error);

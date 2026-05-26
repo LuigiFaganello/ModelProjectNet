@@ -13,8 +13,10 @@ namespace UnitTests.Infrastructure.Repositories
 
         public ExampleRepositoryTests()
         {
+            // Nome único por instância de teste: o provider InMemory mantém o store por
+            // nome de banco no processo, então um nome fixo vazaria estado entre testes.
             _dbContextOptions = new DbContextOptionsBuilder<DataContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
         }
 

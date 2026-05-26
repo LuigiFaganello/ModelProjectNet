@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Application.Interfaces;
 using Domain.Interfaces;
 using Infrastructure.Context;
 using Infrastructure.ExternalService;
-using Infrastructure.ExternalService.Interface;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,20 +19,25 @@ namespace Infrastructure
             this IServiceCollection services,
             IConfiguration configuration) =>
             services
-                .AddServices()
+                .AddServices(configuration)
                 .AddDatabase(configuration)
                 .AddHealthChecks(configuration);
 
-        private static IServiceCollection AddServices(this IServiceCollection services)
+        private static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //Config
-            services.AddHttpClient();
-
             //Repository
             services.AddScoped<IExampleRepository, ExampleRepository>();
 
-            //External Service
-            services.AddScoped<IExampleService, ExampleService>();
+            //External Service (typed client) — BaseAddress/Timeout vêm de Settings:Viacep
+            var baseUrl = configuration["Settings:Viacep:BaseUrl"]
+                ?? throw new InvalidOperationException("Configuration 'Settings:Viacep:BaseUrl' was not found.");
+            var timeoutSeconds = int.TryParse(configuration["Settings:Viacep:TimeOut"], out var seconds) ? seconds : 30;
+
+            services.AddHttpClient<IExampleService, ExampleService>(client =>
+            {
+                client.BaseAddress = new Uri(baseUrl);
+                client.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
+            });
 
             return services;
         }

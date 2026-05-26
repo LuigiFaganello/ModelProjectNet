@@ -1,37 +1,23 @@
+using Application.DTO;
 using Infrastructure.ExternalService;
-using Infrastructure.ExternalService.DTO;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
 using System.Net;
 using FluentAssertions;
-using Infrastructure.Configuration;
 
 namespace UnitTests.Infrastructure.ExternalService
 {
     public class ExampleServiceTests
     {
         private readonly Mock<ILogger<ExampleService>> _loggerMock;
-        private readonly Mock<IOptions<AppSettings>> _optionsMock;
-        private readonly AppSettings _appSettings;
 
         public ExampleServiceTests()
         {
             _loggerMock = new Mock<ILogger<ExampleService>>();
-            _optionsMock = new Mock<IOptions<AppSettings>>();
-            _appSettings = new AppSettings
-            {
-                Viacep = new Viacep
-                {
-                    BaseUrl = "http://test.com/",
-                    TimeOut = 10
-                }
-            };
-            _optionsMock.Setup(o => o.Value).Returns(_appSettings);
         }
 
-        private HttpClient CreateMockHttpClient(HttpStatusCode statusCode, string content)
+        private static HttpClient CreateMockHttpClient(HttpStatusCode statusCode, string content)
         {
             var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             handlerMock
@@ -48,41 +34,41 @@ namespace UnitTests.Infrastructure.ExternalService
                 })
                 .Verifiable();
 
-            return new HttpClient(handlerMock.Object);
+            return new HttpClient(handlerMock.Object)
+            {
+                BaseAddress = new Uri("http://test.com/")
+            };
         }
 
         [Fact]
-        public async Task GetCityByCountry_ShouldReturnData_OnSuccess()
+        public async Task GetAddressesAsync_ShouldReturnMappedData_OnSuccess()
         {
             // Arrange
-            var country = "Brazil";
-            var city = "SaoPaulo";
-            var expectedDto = new List<ExampleServiceDTO> { new ExampleServiceDTO { Cep = "12345-678" } };
-            var jsonResponse = "[{\"cep\": \"12345-678\"}]";
+            var jsonResponse = "[{\"cep\": \"12345-678\", \"localidade\": \"Sao Paulo\", \"uf\": \"SP\"}]";
             var httpClient = CreateMockHttpClient(HttpStatusCode.OK, jsonResponse);
 
-            var service = new ExampleService(_loggerMock.Object, httpClient, _optionsMock.Object);
+            var service = new ExampleService(_loggerMock.Object, httpClient);
 
             // Act
-            var result = await service.GetCityByCountry(country, city);
+            var result = (await service.GetAddressesAsync("SP", "Sao Paulo", "Paulista", CancellationToken.None)).ToList();
 
             // Assert
-            result.Should().NotBeNull();
-            result.Should().BeEquivalentTo(expectedDto);
+            result.Should().HaveCount(1);
+            result[0].ZipCode.Should().Be("12345-678");
+            result[0].City.Should().Be("Sao Paulo"); // mapeado de 'localidade'
+            result[0].State.Should().Be("SP");        // mapeado de 'uf'
         }
 
         [Fact]
-        public async Task GetCityByCountry_ShouldReturnEmptyList_OnError()
+        public async Task GetAddressesAsync_ShouldReturnEmptyList_OnError()
         {
             // Arrange
-            var country = "Brazil";
-            var city = "SaoPaulo";
             var httpClient = CreateMockHttpClient(HttpStatusCode.InternalServerError, "");
 
-            var service = new ExampleService(_loggerMock.Object, httpClient, _optionsMock.Object);
+            var service = new ExampleService(_loggerMock.Object, httpClient);
 
             // Act
-            var result = await service.GetCityByCountry(country, city);
+            var result = await service.GetAddressesAsync("SP", "Sao Paulo", "Paulista", CancellationToken.None);
 
             // Assert
             result.Should().NotBeNull();
@@ -91,7 +77,7 @@ namespace UnitTests.Infrastructure.ExternalService
                 x => x.Log(
                     It.Is<LogLevel>(l => l == LogLevel.Error),
                     It.IsAny<EventId>(),
-                    It.Is<It.IsAnyType>((v, t) => v != null && v.ToString()!.Contains("Erro ao obter todos os exemplos")),
+                    It.Is<It.IsAnyType>((v, t) => v != null && v.ToString()!.Contains("Erro ao obter endereços do serviço externo")),
                     It.IsAny<Exception>(),
                     It.Is<Func<It.IsAnyType, Exception?, string>>((v, t) => true)),
                 Times.Once);
