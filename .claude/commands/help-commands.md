@@ -18,6 +18,7 @@ To get help with available commands, just type:
 
 - `/commit` - Conventional Commits.
 - `/issue` - GitHub Issue Workflow.
+- `/migration` - EF Core Migration Creation.
 - `/reviewpr` - Pull Request Review.
 - `/test` - Test Suite Management.
 
